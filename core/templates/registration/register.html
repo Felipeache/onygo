@@ -1,0 +1,20 @@
+{% extends 'core/index.html'%}
+{% load static%}
+
+{% block content %}
+    <h1>S' I N S C R I R E</h1>
+    <form class="" method="POST">
+        {%csrf_token%}
+        <table>
+            <div>
+                {{user.first_name}}
+                {{ form.as_p}}
+                {{ profileForm.as_p}}
+
+            </div>
+        </table>
+        <input type="reset" value="Annuler">
+        <input type="submit" value="Envoyer">
+    </form>
+
+{% endblock content %}

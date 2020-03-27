@@ -1,0 +1,27 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Pacifico&family=Roboto:ital,wght@0,700;1,500;1,900&display=swap" rel="stylesheet">
+        <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <title>{% block title%} {% endblock title%}</title>
+    </head>
+    <body>
+        {% include 'core/navbar.html' %}
+        <main>
+            <center>
+                    <p>Oops!!!! on dirait que<p>
+                    <p>ce monstre a mangé ton site<p>
+                    <p>ce site est introuvable<br><p>
+                    <p><b>404</b><p>
+            </center>
+
+            <div id="beastainer">
+                <img id="beast404le" src="/static/img/404monster.png" width="50%" height="50%">
+            </div>
+        </main>
+    </body>
+
+</html>

@@ -1,0 +1,50 @@
+{% extends 'base.html'%}
+{% load static%}
+    {% block title %}
+        Créer un événement
+    {% endblock title %}
+
+{%block content%}
+    <h2> SEARCHRESULT.HTML///Chercher un événement<br></h2><br><br><br>
+    <div class="search-container">
+        {% include 'core/search.html' %}
+    </div>
+{% if events %}
+    <div class="eventscontainer">
+            {% for event in events %}
+            <div class="card">
+                    <br><br>
+                    <b>Événement: </b>{{event.event_name}}<br><br>
+                    <b>Description: </b>{{event.event_description}}<br><br>
+                    <b>Proposé par:</b> {{event.owner}}<br><br><br>
+                    <b>Adresse: </b>{{event.event_address}}<br>
+                    <b>Date: </b>{{event.date}}<br><br>
+                    <div class="cardfooter">
+                        <h4><b>
+                            <a href="{% url 'apply' id=event.id %}">Apply</a>
+                        </b></h4>
+                    </div>
+            </div>
+            {% endfor %}
+    <div class="paginator">
+            <ul class="pagination">
+                    {% if events.has_previous %}
+                        <li><a href="?page={{ events.previous_page_number }}">Atras&laquo;</a></li>
+                    {% else %}
+                        <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                    
+                    {% if events.has_next %}
+                        <li><a href="?page={{ events.next_page_number }}">&raquo;</a></li>
+                    {% else %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                </ul>
+    </div>
+
+{% else%}
+    <h1 style="color:red;"> NO EVENT YET CHERCHER-EVENEMENT.HTML</h1>
+{% endif %}
+
+
+{%endblock content%}

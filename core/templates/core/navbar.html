@@ -1,0 +1,18 @@
+<header class="header">
+    <nav>
+        <ul>
+            {% if user.is_authenticated %}
+                <li> <a href="{% url 'index'%}">Home</a></li>
+                <li> <a href="{% url 'search_event' %}">Chercher un événement</a></li>
+                <li> <a href="{% url 'create_event' %}">Creer un événement</a></li>
+                <li> <a href="{% url 'my_events' user.id %}">Mes événements</a></li>
+                <li><center><a href="#home"><img class="avatar" src="/{{ user.userprofile.avatar }}" ></a><div><a href="{% url 'profile' %}">Mon profil</div></a></center></li>
+                <li> Hello {{user.get_short_name | title}} !</li>
+                <li><a href="{% url 'logout' %}">Logout</a> </li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Login</a> /
+                <a href="{% url 'create_user' %}">Sign in</a></li>
+            {% endif%}
+        </ul>
+    </nav>
+</header>

@@ -1,0 +1,58 @@
+{% extends 'base.html'%}
+{% load static%}
+    {% block title %}
+        Créer un événement
+    {% endblock title %}
+
+{%block content%}
+    <h2> Chercher un événement<br></h2><br><br><br>
+    <div class="search-container">
+        {% include 'core/search.html' %}
+    </div>
+{% if events %}
+    <div class="eventscontainer">
+            {% for line in events %}
+            <div class="card">
+                    <br><br>
+                    <b>Événement: </b>{{line.event_name}}<br><br>
+                    <b>Description: </b>{{line.event_description}}<br><br>
+                    <b>Proposé par:</b> {{line.owner}}<br><br><br>
+
+                    <b>Adresse: </b>{{line.event_address}}<br>
+                    <b>Date: </b>{{line.date}}<br><br>
+                    <div class="cardfooter">
+                        <h4><b>
+                            <a href="{% url 'apply' id=event.id %}">Apply</a>
+                        </b></h4>
+                    </div>
+            </div>
+            {% endfor %}
+        <div class="paginator">
+            <ul>
+                <ul class="pagination">
+                        {% if context.has_previous %}
+                            <li><a href="?page={{ context.previous_page_number }}">&laquo;</a></li>
+                        {% else %}
+                            <li class="disabled"><span>&laquo;</span></li>
+                        {% endif %}
+                        {% for i in paginator.page_range %}
+                            {% if context.number == i %}
+                                <li class="active"><span>{{ i }}</span></li>
+                            {% else %}
+                                <li><a href="?page={{ i }}">{{ i }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if context.has_next %}
+                            <li><a href="?page={{ context.next_page_number }}">&raquo;</a></li>
+                        {% else %}
+                            <li class="disabled"><span>&raquo;</span></li>
+                        {% endif %}
+                    </ul>
+        </div>
+
+{% else%}
+    <h1 style="color:red;"> NO EVENT YET CHERCHER-EVENEMENT.HTML</h1>
+{% endif %}
+
+
+{%endblock content%}

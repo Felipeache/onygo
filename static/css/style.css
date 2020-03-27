@@ -1,0 +1,528 @@
+:root {
+    --bcg-color: #3A424C;
+    --text-color : #EF9728;
+    --form-layout-color: #3d75ef;
+    --card-bcgcolor: #AEC5EB;
+    --text-font: 'Comfortaa',serif;
+}
+
+html {
+    background-color: var(--bcg-color);
+    scroll-behavior: smooth;
+    font-family: 'Roboto', sans-serif;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    color: var(--text-color);
+}
+/* CSS pour le monstre de la 404 */
+
+.beast {
+    margin: 0;
+}
+#beastainer {
+    float: right;
+    padding: 20px 0 20px 20px;
+    position: relative;
+}
+#beast404re {
+    left: 231px;
+    top: 68px;
+    -webkit-animation-name: crazyrighteye;
+    animation-name: crazyrighteye;
+}
+#beast404le {
+    left: 125px;
+    top: 65px;
+    -webkit-animation-name: crazylefteye;
+    animation-name: crazylefteye;
+} /*Fin CSS montre 404 */
+
+
+
+/*.mainpic{
+    top: 100%
+    padding: 0px;
+    border: 13px solid #b9d6f2;
+	font-size: 2em;
+    margin: 0px;
+    padding: 0px;
+}*/
+/*Image principale du home*/
+.imgcontainer{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+.mainimg{
+    filter: blur(1px);
+    width: 100vw;
+    height: auto;
+}
+/*texte sur l'image */
+ .CenterdText{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+ }
+
+ .slogan{
+     font-family: 'Pacifico', cursive;
+     text-shadow:  -1px 0 var(--form-layout-color),
+                    0 0px var(--text-color),
+                    1px 0 var(--bcg-color),
+                    0 -1px var(--form-layout-color);
+     filter: drop-shadow(2px 4px 6px black);
+     background-color: #FFEDE5;
+     border-radius: 10px;
+     color: #0A37FF;
+     height: 2rev;
+     opacity: 60%;
+ }
+
+ .CenterdText p{
+     font-family: 'Pacifico', cursive;
+     font-size: -webkit-xxx-large;
+ }
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.wrapper {
+    position: relative; top:70%;
+    margin: 0 auto; width: 640px;
+}
+
+
+.header {
+  display: flex;
+  flex-basis: 100%;
+  background: var(--bcg-color);
+  height: auto;
+  justify-content: flex-end;
+  border-color: #b9d6f2;
+  position: sticky;
+  top: 0px;
+  border: 0px solid #b9d6f2;
+  z-index: 100;
+}
+
+.avatar {
+    width: 40px; height: 4
+    0px;
+}
+
+nav {
+  display: inline-flex;
+  margin: 0 auto;
+  justify-content: space-between;
+
+}
+
+ul {
+  display: flex;
+  list-style-type: none;
+  font-size: 15px;
+}
+
+li {
+  margin: 5px;
+  font-family: var(--text-font);
+}
+
+li a {
+ color: var(--text-color);
+ text-decoration: none;
+ display: inline-block;
+}
+
+li a:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--card-bcgcolor);
+}
+
+.paginator {
+    display: inline-block;
+    margin: 0 auto;
+    justify-content: space-between;
+
+}
+
+.active {
+    font-weight: bold;
+    color : var(--card-bcgcolor);
+    border-color: var(--card-bcgcolor);
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  /*display: flex;*/
+  /*position: relative;*/
+  /*flex-flow: column;*/
+
+  flex-basis: 100%;
+  height: auto;
+  font-family: var(--text-font);
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  /*border: 5px solid blue;*/
+  align-content: center;
+}
+
+.search-container{
+    background: var(--card-bcgcolor);
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    border-radius: 10px;
+    margin: 0 auto;
+    width: 60%;
+    height: auto;
+    font-weight: bold;
+    font-size: 2vw;
+    font-family: var(--text-font);
+    color: black;
+    line-height: 1;
+    z-index: 99;
+    box-shadow: 4px 3px 8px -1px   var(--text-color);
+}
+
+.search-box{
+    margin: 10px;
+    width: 90%;
+    height: auto;
+    color: var(--bcg-color);
+}
+
+.search-input{
+    background-color:var(--bcg-color);
+    width: 50%;
+    height: auto;
+    margin: 10px;
+    padding: 10px;
+    color: inherit;
+    font-weight: bold;
+    font-family: var(--text-font);
+    border-radius: 10px;
+    border: 1px;
+    outline: none;
+    color: var(--text-color)
+}
+.eventscontainer{
+      display: block;
+      position: relative;
+      flex-flow: wrap;
+      /*flex-basis: 100%;*/
+      height: auto;
+      weight: 30rem;
+      justify-content: center;
+      text-align: center;
+      align-items: center;
+      align-content: center;
+    }
+
+
+.alert-success {
+        background: #3FFFA2;
+        display: flex;
+        align-items: baseline;
+        padding: 10px;
+        opacity: 60%;
+        border-radius: 10px;
+        width: 30%;
+        height: auto;
+        margin: 10rv auto 10rv auto;
+        font-weight: bold;
+        font-size: 2vw;
+        color: black;
+        line-height: 1;
+        z-index: 99;
+        box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+}
+
+.alert-error {
+    background: tomato;
+    display: flex;
+    align-items: baseline;
+    padding: 10px;
+    opacity: 60%;
+    border-radius: 10px;
+    width: 30%;
+    margin: 0 auto 10vh auto;
+    height: auto;
+    font-weight: bold;
+    font-size: 2vw;
+    color: black;
+    line-height: 1;
+    z-index: 99;
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+}
+
+.card {
+  background-color: var(--card-bcgcolor);
+  color: var(--bcg-color);
+  font-family: var(--text-font);
+  margin: 2rem;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  padding: 1rem;
+  width: 40vw;
+  margin: 10vh auto 0 auto;
+  border-radius: 10px;
+}
+.cardfooter a{
+    text-decoration: none;
+    color: var(--bcg-color);
+    border: solid 4px;
+    border-color: var(--bcg-color);
+    padding: 1vh;
+    border-radius: 10px;
+}
+
+.cardfooter a:hover{
+    color: tomato;
+    border-color: tomato;
+}
+
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+
+  box-shadow: 1px 1px 13px 1px var(--text-color);
+}
+
+
+.closebtn {
+  margin-left: auto;
+  color: #385E0C;
+  font-weight: bold;
+  float: right;
+  font-size: 30px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.closebtn:hover {
+  color: black;
+
+}
+
+.element{
+    display: inline;
+    flex-basis: 100%;
+    padding: 5px;
+	background-color: b9d6f2;/********************************************?????????**/
+    border: 2px ;
+	font-size: 2em;
+    position: relative;
+    margin: 10px;
+    padding: 25px;
+}
+.form p{
+    display: flex;
+    flex-direction: row;
+    margin: 2vh auto;
+    padding: 0 5vw;
+}
+
+p label {
+    flex: 1;
+    align-items: baseline;
+}
+
+p input {
+    flex: 1;
+    color : var(--text-color);
+    font-weight: bold;
+    font-family: : var(--text-font);
+    background-color: var(--bcg-color);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid;
+    outline: none;
+}
+
+p textarea {
+    flex: 0.9;
+    color : var(--text-color);
+    font-family: : var(--text-font);
+    background-color: var(--bcg-color);
+    border: solid 1px var(--text-color);
+    padding: 1rem;
+    outline: none;
+}
+
+
+/*.boton{
+	color:Blue;
+    height: 2rem;
+
+    width: 1rem;
+    border: none;
+}*/
+.btns-create-event .boton{
+    color: var(--text-color);
+    font-family: var(--text-font);
+    height: 2rem;
+    width: 1rem;
+    border: none;
+}
+
+.boton:hover{
+    color: var(--text-color);
+    border: solid 1px;
+    border-radius: 10px;
+}
+
+
+
+
+
+
+/* FIN CONTAINER AND SON N.1  */
+
+article {
+    display: flex;
+    align-self: center;
+}
+
+/* PICTURE IN SECTION AND HOVER  */
+section article img {
+    filter: grayscale(60%);
+    width: 100%;
+    height: auto;
+    align-self: center;
+    background-color: #1A1A1A;
+}
+section img:hover{
+    /*filter: none;*/
+    /*width: 60vh;*/
+}
+
+/*FIN  PICTURE IN SECTION AND HOVER  */
+
+
+#textPhoto{
+    display: flex;
+    color: aqua;
+    font-size: 4rem;
+    font-family:'Homenaje', serif;
+    background: none;
+}
+
+ article div span {
+  font-size: 5rem;
+  background: linear-gradient(to bottom,rgb(138,110,340), rgb(25.10,10.50,123.90));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline;
+}
+
+/*FIN  SECTION1 */
+
+/*  SECTION 2 */
+
+
+/*  FIN SECTION 2 */
+
+
+
+/*  SECTION 3  */
+ h2 {
+    font-size: 3rem;
+
+
+}
+
+#element3 p {
+    text-indent: 8.6em;
+    font-size: 1.5rem;
+    align-items: flex-end;
+    text-align: justify;
+    padding: 50;
+}
+
+/*  FIN SECTION 3 */
+
+
+
+
+
+
+
+
+
+/*  FOOTER  */
+footer {
+    display: flex;
+    justify-content: center;
+    height: auto;
+    background: #08605f;
+    border: 5px ;
+}
+/* FIN FOOTER  */
+
+
+
+
+
+/*  KEYFRAMES  */
+
+@keyframes Entrada {
+
+  from
+        {
+          opacity: 0;
+          pointer-events: none;
+        }
+  to
+  {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+ /* Keyframe de l'annimation de disparition*/
+
+@keyframes fadeAnimation {
+
+  from
+        {
+          opacity: 1;
+          pointer-events: all;
+        }
+  to
+  {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+}
+
+@media screen and (max-width: 700px) {
+
+     html {
+            font-size: 75%;
+            color: blue;
+            background-color: red;
+
+          }
+    .container > article {
+        flex-direction: column;
+    }
+
+
+      #img1 {
+        display: none;
+      }
+
+
+}

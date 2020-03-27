@@ -1,0 +1,39 @@
+{% extends 'base.html'%}
+{% load static%}
+    {% block title %}
+        Créer un événement
+    {% endblock title %}
+
+{%block content%}
+    <h2> Chercher événement<br>
+        {{user | title}}<br>
+        {{user.id}}</h2>
+
+{% if event%}
+<div class="container">
+    <table>
+        <thead>
+
+        </thead>
+        <tbody>
+            {% for line in event %}
+            <tr>
+                <tb>{{line.id}}</tb>
+                <tb>{{line.event_name}}</tb>
+                <tb>{{line.owner}}</tb>
+                <tb>{{line.event_description}}</tb>
+                <tb>{{line.event_address}}</tb>
+                <tb>{{line.date}}</tb>
+                <tb>{{line.time}}</tb>
+                <tb><button type="submit"><a href="{% url 'apply' id=line.id %}">Apply</a></button></tb>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else%}
+    <h1 style="color:red;"> NO EVENT YET
+{%endif%}
+
+
+{%endblock content%}

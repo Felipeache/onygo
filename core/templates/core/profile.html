@@ -1,0 +1,24 @@
+{% extends 'base.html'%}
+{% load static%}
+
+{% block title%}
+    Mes Evévements
+{% endblock title%}
+
+{% block headimg%}
+{% endblock headimg%}
+
+{% block content %}
+<h1>Profil de {{utilisateur.get_short_name | title}}</h1>
+<div class="container" >
+        <div>
+            <img src="/{{ user.userprofile.avatar }}" width="100" height="100"></a><br>
+            Prénom : {{utilisateur.get_short_name | title}}<br>
+            Ville : {{utilisateur.userprofile.city | title}}<br>
+            Bio : {{utilisateur.userprofile.user_description}}
+        </div>
+</div>
+
+
+
+{% endblock content %}

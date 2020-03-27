@@ -1,0 +1,37 @@
+{% extends 'base.html'%}
+{% load static%}
+
+{% block title%}
+    Mes Evévements
+{% endblock title%}
+
+{% block headimg%}
+{% endblock headimg%}
+
+{% block content %}
+    <h2> liste de mes événements</h2>
+    {% if events%}
+        <div class="eventscontainer">
+                {% for event in events %}
+                <div class="card">
+                        <br><br>
+                        <b>Événement: </b>{{event.event_name}}<br><br>
+                        <b>Description: </b>{{event.event_description}}<br><br>
+                        <b>Proposé par:</b> {{event.owner}}<br><br><br>
+
+                        <b>Adresse: </b>{{event.event_address}}<br>
+                        <b>Date: </b>{{event.date}}<br><br>
+                        <div class="cardfooter">
+                            <h4><b>
+                                <a href="{% url 'validate' event.id %}">Voir demandes</a>
+                            </b></h4>
+                        </div>
+            </div>
+                {% endfor %}
+
+
+        </div>
+    {% else%}
+        <br><br><h1> Oops Tu n'as pas encore d'événements  LISTE-EVENEMENTS.HTML</h1>
+    {%endif%}
+{% endblock content %}

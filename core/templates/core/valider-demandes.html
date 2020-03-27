@@ -1,0 +1,32 @@
+{% extends 'base.html'%}
+{% load static%}
+
+{% block title%}
+    Mes Evénements
+{% endblock title%}
+
+
+{% block headimg%}
+{% endblock headimg%}
+
+<h2> liste de mes evenements à valideer</h2>
+
+{%block content%}
+{% if events%}
+    <div class="eventscontainer">
+        <div class="card">
+            <th>Personnes intéresés</th>
+            {% for event in events %}
+                <p><b><a href="{% url 'visit_profile' event.guest.user_id  %}">{{event.guest}} est intéresé(e)</a></b>
+                <b><button type="submit">Accepter</button> / </b>
+                <b><button type="submit">Refuser</button></b>
+            {% endfor %}
+        </div>
+    </div>
+        {% else%}
+            <h1 style="color:red;"> Pas de demandes pour cet événement valider-demandes.html :-]
+        {%endif%}
+
+
+
+{%endblock content%}

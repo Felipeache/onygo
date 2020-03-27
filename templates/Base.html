@@ -1,0 +1,29 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Pacifico&family=Roboto:ital,wght@0,700;1,500;1,900&display=swap" rel="stylesheet">
+        <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <title>{% block title%} {% endblock title%}</title>
+    </head>
+    <body>
+        {% include 'core/navbar.html' %}
+        <main>
+            <div class = "container">
+                {% if messages %}
+                    {% for message in messages %}
+                        <span class="alert-{{ message.tags }}">
+                            {{message}}
+                            <div class="closebtn" onclick="this.parentElement.style.display='none';">&times;</div>
+                            </div>
+                        </span>
+                    {% endfor %}
+                {% endif %}
+            {% block content %}
+            {% endblock %}
+            </div>
+        </main>
+    </body>
+</html>
