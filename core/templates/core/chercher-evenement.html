@@ -7,7 +7,9 @@
 {%block content%}
     <h2> Chercher un événement<br></h2><br><br><br>
     <div class="search-container">
-        {% include 'core/search.html' %}
+        <form class="search-box" method="GET"  action="{% url 'search' %}">
+            template chercher-evenement.html peux chercher une ville, une discipline ou un mot clé: <input class="search-input" name="q" placeholder="Chercher"><button type="submit">Envoyer</button><br><br>
+        </form>
     </div>
 {% if events %}
     <div class="eventscontainer">
@@ -22,7 +24,7 @@
                     <b>Date: </b>{{line.date}}<br><br>
                     <div class="cardfooter">
                         <h4><b>
-                            <a href="{% url 'apply' id=event.id %}">Apply</a>
+                            <a href="{% url 'apply' id=line.id %}">Apply</a>
                         </b></h4>
                     </div>
             </div>
@@ -30,20 +32,20 @@
         <div class="paginator">
             <ul>
                 <ul class="pagination">
-                        {% if context.has_previous %}
-                            <li><a href="?page={{ context.previous_page_number }}">&laquo;</a></li>
+                        {% if events.has_previous %}
+                            <li><a href="?page={{ events.previous_page_number }}">&laquo;</a></li>
                         {% else %}
                             <li class="disabled"><span>&laquo;</span></li>
                         {% endif %}
                         {% for i in paginator.page_range %}
-                            {% if context.number == i %}
+                            {% if events.number == i %}
                                 <li class="active"><span>{{ i }}</span></li>
                             {% else %}
                                 <li><a href="?page={{ i }}">{{ i }}</a></li>
                             {% endif %}
                         {% endfor %}
-                        {% if context.has_next %}
-                            <li><a href="?page={{ context.next_page_number }}">&raquo;</a></li>
+                        {% if events.has_next %}
+                            <li><a href="?page={{ events.next_page_number }}">&raquo;</a></li>
                         {% else %}
                             <li class="disabled"><span>&raquo;</span></li>
                         {% endif %}

@@ -11,19 +11,13 @@
 {% block content %}
 <h1> Edit Mon Profile</h1>
 <div class="container">
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
     <p>
         {{form.as_p}}
         <button type="submit">Mofidier</button>
     </p>
-    <h1> Changer mon mot de passe</h1>
-    <div class="container">
-        <form method="POST">
-        <p>
-            {% include 'core/change-password.html' %}
-        <p>
-    </div>
+    
 </div>
 
 

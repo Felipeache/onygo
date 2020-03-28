@@ -30,11 +30,11 @@ def search(request):
             page = request.GET.get('page')
             events = paginator.get_page(page)
             messages.success(request,f'Nous avons trouvé {qtty} événements')
-            return render(request, "core/search-result.html", {"events":events})
+            return render(request, "core/chercher-evenement.html", {"events":events})
 
         else:
             messages.error(request, "Nos luttins n'ont pas pu lire ta recherche")
-            return redirect("search_event")
+            return render(request, "core/chercher-evenement.html")
 
 
         #else:
@@ -218,8 +218,9 @@ def create_event(request):
 
 def create_user(request):
     if request.method == "POST":
+
         form = CustomUserCreationForm(request.POST)
-        ProfileForm = UserProfile_Form(request.POST)
+        ProfileForm = UserProfile_Form(request.POST, request.FILES)
         if form.is_valid() and ProfileForm.is_valid():
             user = form.save()
             profile = ProfileForm.save(commit=False)
