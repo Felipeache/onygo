@@ -86,8 +86,11 @@ def edit_profile(request):
     if request.method == 'POST':
         try:
             form = EditProfileForm(request.POST, instance=request.user)
-            if form.is_valid():
-                form.save()
+            profileForm = UserProfile_Form(request.POST,request.FILES, instance=request.user.userprofile)
+            if form.is_valid() and profileForm.is_valid():
+                form.save(commit=False)
+                profileForm.save(commit=True)
+                form.save(commit=True)
                 messages.success(request, 'Ton profil a été modifié :)')
                 return redirect('profile')
         except Exception as e:
@@ -98,7 +101,8 @@ def edit_profile(request):
                     )
     else:
         form = EditProfileForm(instance=request.user)
-        context = {'form': form}
+        profileForm = UserProfile_Form(instance=request.user.userprofile)
+        context = {'form': form, 'profileForm': profileForm }
         return render(request, 'core/edit-profile.html', context)
 
 
@@ -137,6 +141,8 @@ def validate(request, id):
 
 def accept(request, id):
     pass
+
+
 #Muestro los eventos en la ciudad del usuario:
 def search_event(request):
     user_id = request.user.id
@@ -219,7 +225,6 @@ def create_event(request):
 
 def create_user(request):
     if request.method == "POST":
-
         form = CustomUserCreationForm(request.POST)
         ProfileForm = UserProfile_Form(request.POST, request.FILES)
         if form.is_valid() and ProfileForm.is_valid():
