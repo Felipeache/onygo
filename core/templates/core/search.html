@@ -1,4 +1,24 @@
+    <!--
+    <div class="search-container">
+        <form class="search-box" method="POST" >
+        {% csrf_token %}
+            <div class="search-div">
+                <div id="search-input">
+                    <p>template chercher-evenement.html peux chercher une ville, une discipline ou un mot clé:
+                        <input type="text" name="q" class="search-input" placeholder="Chercher" value="{{request.GET.q}}">
+                        <span><button type="submit">Envoyer</button><br><br>
+                </div>
+            </div>
+        </form>
+    </div>
 
-    <form class="search-box" method="GET"  action="{% url 'search' %}">
-        Tu peux chercher une ville, une discipline ou un mot clé: <input class="search-input" name="q" placeholder="Chercher"><button type="submit">Envoyer</button><br><br>
-    </form>
+    -->
+    <div class="search-container">
+        <form class="search-box" method="GET"  action="{% url 'search'%}">
+            Tu peux chercher une ville, une discipline ou un mot clé:
+            <input type="text" class="search-input" placeholder="Chercher" name="q" value="{{request.GET.q}}">
+            <span>
+                <button type="submit" class="boton">Chercher</button><br><br>
+            </span>
+        </form>
+    </div>

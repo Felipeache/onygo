@@ -10,7 +10,7 @@
 
 {% block content %}
     <h2> liste de mes événements</h2>
-    
+
     {% if events%}
         <div class="eventscontainer">
                 {% for event in events %}
@@ -31,6 +31,28 @@
                 {% endfor %}
 
 
+        </div>
+        <div class="paginator">
+            <div class="search-content">
+                <ul class="pagination">
+                    {{ events.has_previous }}<br>
+                    {{ events.has_next}}<br>
+                    {{ events.paginator.count}}<br>
+                    {{ events.paginator.num_pages }}<br>
+                    {{ events.paginator.page_range }}<br>
+                    {% if events.has_previous %}
+                            <li><a href="?page={{ events.previous_page_number }}">&laquo; Anterior</a></li>
+                        {% else %}
+                            <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+
+                        {% if events.has_next %}
+                            <li><a href="?page={{ events.next_page_number }}">&raquo; Siguiente</a></li>
+                        {% else %}
+                            <li class="disabled"><span>&raquo;</span></li>
+                        {% endif %}
+                </ul>
+            </div>
         </div>
     {% else%}
         <br><br><h1> Oops Tu n'as pas encore d'événements  LISTE-EVENEMENTS.HTML</h1>

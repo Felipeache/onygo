@@ -10,7 +10,7 @@ class UserProfile(models.Model):
     user_description = models.TextField("Bio",blank = True, null = False)
     address =  models.CharField("Address",max_length = 200, blank = False, null = False)
     city =  models.CharField("Ville",max_length = 100, blank = False, null = False)
-    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)# 
+    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True, default='/avatars/default.png')# 
     is_the_owner = models.BooleanField('Annonceur', default=False)
     is_coming = models.BooleanField('Asistant', default=False)
 

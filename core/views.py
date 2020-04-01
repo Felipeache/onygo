@@ -18,23 +18,24 @@ def view_404(request, *e):
 
 
 def search(request):
-        q = request.GET.get('q')
-        if q:
-            events = Event.objects.filter(
-            Q(city__icontains = q) |
-            Q(event_name__icontains = q)|
-            Q(event_description__icontains = q)
-            ).distinct().order_by('date')
-            qtty = events.count()
-            paginator = Paginator(events, 5)
-            page = request.GET.get('page')
-            events = paginator.get_page(page)
-            messages.success(request,f'Nous avons trouvé {qtty} événements')
-            return render(request, "core/chercher-evenement.html", {"events":events})
-
-        else:
-            messages.error(request, "Nos luttins n'ont pas pu lire ta recherche")
-            return render(request, "core/chercher-evenement.html")
+    q = request.GET.get('q')
+    if q:
+        events = Event.objects.filter(Q(city__icontains = q) |
+                                     Q(event_name__icontains = q)|
+                                     Q(event_description__icontains = q)
+                                     ).distinct().order_by('date')
+        qtty = events.count()
+        paginator = Paginator(events, 5)
+        page = request.GET.get('page')
+        events = paginator.get_page(page)
+        #messages.success(request,f'Nous avons trouvé {qtty} événements {event}')
+        return render(request, "core/chercher-evenement.html", {"events":events})
+        #else:
+        #    messages.error(request,f'Nos lutins n\'ont pas compris')
+        #    return render(request, "core/chercher-evenement.html")
+    else:
+        messages.success(request, "todos los eventos de tu ciudad:")
+        return (search_event(request))
 
 
         #else:
@@ -142,7 +143,7 @@ def search_event(request):
     u=UserProfile.objects.get(user_id=user_id)
     events = Event.objects.filter(city = u.city).order_by('date')
     context = {'events':events}
-    return render (request, 'core/search-result.html', context)
+    return render (request, 'core/chercher-evenement.html', context)
 
 
 #class SearchEventList(ListView):

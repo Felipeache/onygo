@@ -87,14 +87,20 @@ html {
      font-size: -webkit-xxx-large;
  }
 
+p{
+    display: flex;
+    align-items: center;
+}
 h1 {
   font-size: 2em;
   margin: 0.67em 0;
 }
 
 .wrapper {
-    position: relative; top:70%;
-    margin: 0 auto; width: 640px;
+    position: relative;
+    top:70%;
+    margin: 0 auto;
+    width: 60rem;
 }
 
 
@@ -326,10 +332,11 @@ li a:hover{
     padding: 25px;
 }
 .form p{
-    display: flex;
+
     flex-direction: row;
     margin: 2vh auto;
     padding: 0 5vw;
+    width: 40rem;
 }
 
 p label {
@@ -372,7 +379,8 @@ p textarea {
     color: var(--text-color);
     font-family: var(--text-font);
     height: 2rem;
-    width: 1rem;
+    width: auto;
+    margin: 1rem;
     border: none;
 }
 
