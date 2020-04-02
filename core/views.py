@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import PasswordChangeForm
@@ -140,30 +140,14 @@ def validate(request, id):
 
 
 def accept(request, guest_id, event_id):
-    print('******************************')
-    print('******************************')
-    print('******************************')
-    print(f'{guest_id}    {event_id}')
-    print('******************************')
-    print('******************************')
-    print('******************************')
-    #guest_id = request.GET.get(guest_id)
-    #event_id = request.GET.get(event_id)
     guest = UserProfile.objects.get(user_id=guest_id)
     ev = EventJoin.objects.get(id=event_id)
-    print('******************************')
-    print('******************************')
-    print('******************************')
-    print(f'Guestid: {guest_id} /////// event_d:{event_id}')
-    print('******************************')
-    print('******************************')
-    print('******************************')
     ev.accepted = True
-    ev.save()
-    if (ev.accepted ):
-        messages.error(request,f'id recibido: {guest_id} request: {request}')
+    #ev.save()
+    if (ev.accepted):
+        messages.success(request, f'{guest} a été accepté à ton événement')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-    return redirect('index')
 
 
 #Muestro los eventos en la ciudad del usuario:
