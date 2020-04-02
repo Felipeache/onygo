@@ -20,28 +20,25 @@ def view_404(request, *e):
 def search(request):
     q = request.GET.get('q')
     if q:
-        events = Event.objects.filter(Q(city__icontains = q) |
-                                     Q(event_name__icontains = q)|
-                                     Q(event_description__icontains = q)
-                                     ).distinct().order_by('date')
-        qtty = events.count()
+        events = Event.objects.filter(
+                                    Q(city__icontains=q)
+                                    | Q(event_name__icontains=q)
+                                    | Q(event_description__icontains=q)
+                                ).distinct().order_by('date')
         paginator = Paginator(events, 5)
         page = request.GET.get('page')
         events = paginator.get_page(page)
-        #messages.success(request,f'Nous avons trouvé {qtty} événements {event}')
-        return render(request, "core/chercher-evenement.html", {"events":events})
-        #else:
-        #    messages.error(request,f'Nos lutins n\'ont pas compris')
-        #    return render(request, "core/chercher-evenement.html")
+        return render(
+                        request,
+                        "core/chercher-evenement.html",
+                        {"events": events}
+                    )
     else:
-        messages.success(request, "todos los eventos de tu ciudad:")
+        messages.success(
+                        request,
+                        "todos los eventos de tu ciudad:"
+                    )
         return (search_event(request))
-
-
-        #else:
-        #    messages.error(request,"Else de if q: devuelvo a \"search_event\" ")
-        #    return redirect( "search_event")
-
 
 
 def home(request):
@@ -86,7 +83,11 @@ def edit_profile(request):
     if request.method == 'POST':
         try:
             form = EditProfileForm(request.POST, instance=request.user)
-            profileForm = UserProfile_Form(request.POST,request.FILES, instance=request.user.userprofile)
+            profileForm = UserProfile_Form(
+                                            request.POST,
+                                            request.FILES,
+                                            instance=request.user.userprofile
+                                    )
             if form.is_valid() and profileForm.is_valid():
                 form.save(commit=False)
                 profileForm.save(commit=True)
@@ -102,7 +103,7 @@ def edit_profile(request):
     else:
         form = EditProfileForm(instance=request.user)
         profileForm = UserProfile_Form(instance=request.user.userprofile)
-        context = {'form': form, 'profileForm': profileForm }
+        context = {'form': form, 'profileForm': profileForm}
         return render(request, 'core/edit-profile.html', context)
 
 
@@ -126,10 +127,9 @@ def my_events(request, id):
         events = Event.objects.filter(owner=request.user.id).order_by('date')
         context = {'events': events}
         return render(request, "core/liste-evenements.html", context)
-def holi(request):
-    pass
 
-def validate(request, id):
+
+def validate(request,id):
     event = Event.objects.get(id=id)
     if event.owner_id == request.user.id:
         events = EventJoin.objects.filter(event=id)
@@ -141,29 +141,14 @@ def validate(request, id):
 
 
 def accept(request, guest_id, event_id):
-    print('******************************')
-    print('******************************')
-    print('******************************')
-    print(f'{guest_id}    {event_id}')
-    print('******************************')
-    print('******************************')
-    print('******************************')
-    #guest_id = request.GET.get(guest_id)
-    #event_id = request.GET.get(event_id)
     guest = UserProfile.objects.get(user_id=guest_id)
     ev = EventJoin.objects.get(id=event_id)
-    print('******************************')
-    print('******************************')
-    print('******************************')
-    print(f'Guestid: {guest_id} /////// event_d:{event_id}')
-    print('******************************')
-    print('******************************')
-    print('******************************')
-    ev.accepted = True
-    ev.save()
-    if (ev.accepted ):
-        messages.error(request,f'id recibido: {guest_id} request: {request}')
-
+    if not ev.accepted:
+        ev.accepted = True
+        ev.save()
+        messages.success(request, f'{guest} a été accepté')
+    else:
+        messages.error(request, f'{guest} a déjà été accepté')
     return redirect('index')
 
 
