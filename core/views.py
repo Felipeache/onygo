@@ -139,8 +139,31 @@ def validate(request, id):
         return redirect('index')
 
 
-def accept(request, id):
-    pass
+def accept(request, guest_id, event_id):
+    print('******************************')
+    print('******************************')
+    print('******************************')
+    print(f'{guest_id}    {event_id}')
+    print('******************************')
+    print('******************************')
+    print('******************************')
+    #guest_id = request.GET.get(guest_id)
+    #event_id = request.GET.get(event_id)
+    guest = UserProfile.objects.get(user_id=guest_id)
+    ev = EventJoin.objects.get(id=event_id)
+    print('******************************')
+    print('******************************')
+    print('******************************')
+    print(f'Guestid: {guest_id} /////// event_d:{event_id}')
+    print('******************************')
+    print('******************************')
+    print('******************************')
+    ev.accepted = True
+    ev.save()
+    if (ev.accepted ):
+        messages.error(request,f'id recibido: {guest_id} request: {request}')
+
+    return redirect('index')
 
 
 #Muestro los eventos en la ciudad del usuario:

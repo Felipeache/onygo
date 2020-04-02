@@ -10,7 +10,7 @@ class UserProfile(models.Model):
     user_description = models.TextField("Bio",blank = True, null = False)
     address =  models.CharField("Address",max_length = 200, blank = False, null = False)
     city =  models.CharField("Ville",max_length = 100, blank = False, null = False)
-    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True, default='/avatars/default.png')# 
+    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True, default='/avatars/default.png')#
     is_the_owner = models.BooleanField('Annonceur', default=False)
     is_coming = models.BooleanField('Asistant', default=False)
 
@@ -31,32 +31,32 @@ class Event(models.Model):
             related_name='event_owner'
         )
     event_assisters = models.ManyToManyField(
-            UserProfile,
-            through='EventJoin',
-            related_name='event_assisters'
+                                UserProfile,
+                                through='EventJoin',
+                                related_name='event_assisters'
         )
     event_name = models.CharField(
-            "Title",
-            max_length = 100,
-            blank = False,
-            null = False
+                                "Title",
+                                max_length = 100,
+                                blank = False,
+                                null = False
         )
     event_description = models.TextField(
-            "Description de l'événement",
-            blank = True,
-            null = False
+                                "Description de l'événement",
+                                blank = True,
+                                null = False
         )
     nber_of_places = models.IntegerField(
-            'Combien de personnes cherchez-vous?',
-            blank=False,
-            null=False,
-            default=1
+                                'Combien de personnes cherchez-vous?',
+                                blank=False,
+                                null=False,
+                                default=1
         )
     event_address = models.CharField(
-            "Address",
-            max_length = 1024,
-            blank = False,
-            null = False
+                                "Address",
+                                max_length = 1024,
+                                blank = False,
+                                null = False
         )
 
     zip_code = models.CharField("Code postal", max_length=6,blank = False, null = False)
@@ -78,17 +78,17 @@ class Event(models.Model):
 
 class EventJoin(models.Model):
     event = models.ForeignKey(
-            Event, null=False,
-            blank=False,
-            verbose_name='événement',
-            on_delete=models.PROTECT
+                    Event, null=False,
+                    blank=False,
+                    verbose_name='événement',
+                    on_delete=models.PROTECT
         )
     guest = models.ForeignKey(
-            UserProfile,
-            null=False,
-            blank=False,
-            verbose_name='guest',
-            on_delete=models.PROTECT
+                    UserProfile,
+                    null=False,
+                    blank=False,
+                    verbose_name='guest',
+                    on_delete=models.PROTECT
         )
     accepted = models.BooleanField(default=False, null=True, blank=True, verbose_name='A assisté')
     class Meta:
@@ -103,17 +103,22 @@ class EventJoin(models.Model):
 
 class Evaluation(models.Model):
     evaluator = models.ForeignKey(
-            UserProfile,
-            null=True,
-            on_delete = models.SET_NULL,
-            related_name='evaluator'
+                    UserProfile,
+                    null=True,
+                    on_delete = models.SET_NULL,
+                    related_name='evaluator'
         )
-    evaluation_text = models.CharField("Evaluation",max_length = 1024,blank = True, null = False)
+    evaluation_text = models.CharField(
+                    "Evaluation"
+                    ,max_length = 1024,
+                    blank = True,
+                    null = False
+            )
     evaluated_guy = models.ForeignKey(
-            UserProfile,
-            null=True,
-            on_delete = models.SET_NULL,
-            related_name='evaluated'
+                    UserProfile,
+                    null=True,
+                    on_delete = models.SET_NULL,
+                    related_name='evaluated'
         )
     class Meta:
         verbose_name = "Evaluation"

@@ -17,8 +17,8 @@
         <div class="card">
             <th>Personnes intéresés</th>
             {% for event in events %}
-                <p><b><a href="{% url 'visit_profile' event.guest.user_id  %}">{{event.guest}} est intéresé(e)</a></b>
-                <b><button type="submit">Accepter</button> / </b>
+                <p><b><a href="{% url 'visit_profile' event.guest.user_id  %}">{{event.guest}} </a>est intéresé(e)</b>
+                <b><button type="submit"><a href="{% url 'accept' event.guest.user_id event.id %}">Accepter</button></a> / </b>
                 <b><button type="submit">Refuser</button></b>
             {% endfor %}
         </div>
