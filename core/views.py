@@ -232,7 +232,7 @@ def create_event(request):
                             f'Oops {request.user}! ton événement n\'a pas été crée :C'
                         )
     return render(request, 'core/creer-evenement.html', data)
-
+#holi
 
 def create_user(request):
     if request.method == "POST":
