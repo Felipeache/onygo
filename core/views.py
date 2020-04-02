@@ -124,8 +124,12 @@ def my_events(request, id):
     event = get_object_or_404(Event, id=id)
     if event:
         events = Event.objects.filter(owner=request.user.id).order_by('date')
+        qtty = events.count()
+        paginator = Paginator(events, 5)
+        page = request.GET.get('page')
+        events = paginator.get_page(page)
         context = {'events': events}
-        return render(request, "core/liste-evenements.html", context)
+        return render(request, "core/liste-evenements.html", {"events":events})
 
 
 def validate(request, id):
@@ -143,7 +147,7 @@ def accept(request, guest_id, event_id):
     guest = UserProfile.objects.get(user_id=guest_id)
     ev = EventJoin.objects.get(id=event_id)
     ev.accepted = True
-    #ev.save()
+    ev.save()
     if (ev.accepted):
         messages.success(request, f'{guest} a été accepté à ton événement')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
