@@ -126,7 +126,8 @@ def my_events(request, id):
         events = Event.objects.filter(owner=request.user.id).order_by('date')
         context = {'events': events}
         return render(request, "core/liste-evenements.html", context)
-
+def holi(request):
+    pass
 
 def validate(request, id):
     event = Event.objects.get(id=id)
