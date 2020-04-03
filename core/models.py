@@ -101,6 +101,30 @@ class EventJoin(models.Model):
         return self.event.event_name
 
 
+class Message(models.Model):
+    sender = models.ForeignKey(
+                    UserProfile,
+                    null=True,
+                    on_delete = models.SET_NULL,
+                    related_name='sender'
+        )
+    receiver = models.ForeignKey(
+                    UserProfile,
+                    null=True,
+                    on_delete = models.SET_NULL,
+                    related_name='receiver'
+        )
+    text = models.TextField('Message:', blank = True, null = False )
+    sent = models.DateTimeField(auto_now=True)
+    class Meta:
+        verbose_name = "Message"
+        verbose_name_plural = "Messages"
+    def __str__(self):
+            return(str(self.sender))
+
+
+
+
 class Evaluation(models.Model):
     evaluator = models.ForeignKey(
                     UserProfile,
