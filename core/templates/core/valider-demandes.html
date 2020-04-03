@@ -35,10 +35,25 @@
     <div class="eventscontainer">
         <div class="card">
             <th>Personnes Acceptés</th>
-            {% for event in accepted %}
-                <p><b><a href="{% url 'visit_profile' event.guest.user_id  %}">{{event.guest | title}}</a>
 
-            {% endfor %}
+            <table>
+                <thead>
+                    <tr>
+                    <th>Utilisateur</th>
+                    <th>Contacter</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                {% for event in accepted %}
+                <tr>
+                <td><p><b><a href="{% url 'visit_profile' event.guest.user_id  %}">{{event.guest | title}}</a></td>
+                <td><p><b><a href="{% url 'visit_profile' event.guest.user_id  %}">Envoyer un message</a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+
+
         </div>
     </div>
         {% else%}
