@@ -146,12 +146,14 @@ def validate(request, id):
 def accept(request, guest_id, event_id):
     guest = UserProfile.objects.get(user_id=guest_id)
     ev = EventJoin.objects.get(id=event_id)
-    ev.accepted = True
-    ev.save()
-    if (ev.accepted):
-        messages.success(request, f'{guest} a été accepté à ton événement')
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
+    if not ev.accepted:
+        ev.accepted = True
+        ev.save()
+        messages.success(request, f'{guest} a été accepté')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        messages.error(request, f'{guest} a déjà été accepté')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 #Muestro los eventos en la ciudad del usuario:
@@ -160,7 +162,7 @@ def search_event(request):
     u=UserProfile.objects.get(user_id=user_id)
     events = Event.objects.filter(city = u.city).order_by('date')
     context = {'events':events}
-    return render (request, 'core/chercher-evenement.html', context)
+    return render (request, 'core/liste-evenements.html', context)
 
 
 #class SearchEventList(ListView):
@@ -232,7 +234,7 @@ def create_event(request):
                             f'Oops {request.user}! ton événement n\'a pas été crée :C'
                         )
     return render(request, 'core/creer-evenement.html', data)
-#holi
+
 
 def create_user(request):
     if request.method == "POST":

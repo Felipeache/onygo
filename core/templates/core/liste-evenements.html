@@ -10,8 +10,10 @@
 
 {% block content %}
     <h2> liste de mes événements</h2>
+    {% include 'core/search.html' %}
 
     {% if events%}
+    <h1><p> evénéments à venir dans ta ville </p></h1>
         <div class="eventscontainer">
                 {% for event in events %}
                 <div class="card">
@@ -22,11 +24,21 @@
 
                         <b>Adresse: </b>{{event.event_address}}<br>
                         <b>Date: </b>{{event.date}}<br><br>
+                        <b>user.id: </b>{{user.id}}<br><br>
+                        <b>event.owner: </b>{{event.owner   }}<br><br>
+                        {% if event.owner_id == user.id %}
                         <div class="cardfooter">
                             <h4><b>
                                 <a href="{% url 'validate' event.id %}">Voir demandes</a>
                             </b></h4>
                         </div>
+                        {% else %}
+                        <div class="cardfooter">
+                            <h4><b>
+                                <a href="{% url 'apply' id=event.id %}">Apply</a>
+                            </b></h4>
+                        </div>
+                        {% endif %}
             </div>
                 {% endfor %}
 
@@ -34,11 +46,13 @@
         </div>
         <div class="paginator">
             <ul class="pagination">
-                    {% if events.has_previous %}
+            {% if paginator %}
+                {% if events.has_previous %}
                         <li><a href="?page={{ events.previous_page_number }}">&laquo;</a></li>
                     {% else %}
                          <li class="disabled"><span>&laquo;</span></li>
                     {% endif %}
+
                     {% for i in events.paginator.page_range %}
                             {% if events.number == i %}
                                 <li class="active"><span>{{ i }}</span></li>
@@ -46,11 +60,14 @@
                                 <li><a href="?page={{ i }}">{{ i }}</a></li>
                             {% endif %}
                     {% endfor %}
+
                     {% if events.has_next %}
                         <li><a href="?page={{ events.next_page_number }}">&raquo; </a></li>
                     {% else %}
                         <li class="disabled"><span>&raquo;</span></li>
                     {% endif %}
+            {% endif %}
+
                 </ul>
         </div>
     {% else%}

@@ -26,29 +26,27 @@
                     </div>
             </div>
             {% endfor %}
-        <div class="paginator">
-            <div class="search-content">
+            <div class="paginator">
                 <ul class="pagination">
-                    {{ events.has_previous }}<br>
-                    {{ events.has_next}}<br>
-                    {{ events.paginator.count}}<br>
-                    {{ events.paginator.num_pages }}<br>
-                    {{ events.paginator.page_range }}<br>
-                    {% if events.has_previous %}
-                            <li><a href="?page={{ events.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">&laquo; Anterior</a></li>
+                        {% if events.has_previous %}
+                            <li><a href="?page={{ events.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">&laquo;</a></li>
                         {% else %}
-                            <li class="disabled"><span>&laquo;</span></li>
-                    {% endif %}
-
+                             <li class="disabled"><span>&laquo;</span></li>
+                        {% endif %}
+                        {% for i in events.paginator.page_range %}
+                                {% if events.number == i %}
+                                    <li class="active"><span>{{ i }}</span></li>
+                                {% else %}
+                                    <li><a href="?page={{ i }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">{{ i }}</a></li>
+                                {% endif %}
+                        {% endfor %}
                         {% if events.has_next %}
-                            <li><a href="?page={{ events.next_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">&raquo; Siguiente</a></li>
+                            <li><a href="?page={{ events.next_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">&raquo; </a></li>
                         {% else %}
                             <li class="disabled"><span>&raquo;</span></li>
                         {% endif %}
-                </ul>
+                    </ul>
             </div>
-        </div>
-
 {% else%}
     <h1 style="color:red;"> NO EVENT YET CHERCHER-EVENEMENT.HTML</h1>
 {% endif %}
