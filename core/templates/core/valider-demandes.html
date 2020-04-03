@@ -17,15 +17,33 @@
         <div class="card">
             <th>Personnes intéresés</th>
             {% for event in events %}
-                <p><b><a href="{% url 'visit_profile' event.guest.user_id  %}">{{event.guest}} </a>est intéresé(e)</b>
-                <b><button type="submit"><a href="{% url 'accept' event.guest.user_id event.id %}">Accepter</button></a> / </b>
+            {% if event not in accepted%}
+                <p><b><a href="{% url 'visit_profile' event.guest.user_id  %}">{{event.guest | title}}</a> est intéresé(e)</b>
+                <b><button type="submit"><a href="{% url 'accept' event.guest.user_id event.id %}"></button></a> / </b>
                 <b><button type="submit">Refuser</button></b>
+                {% else %}
+                <p><b><a href="{% url 'visit_profile' event.guest.user_id  %}">{{event.guest | title}}</a> a déjà été accpté(e)</b>
+                {% endif %}
             {% endfor %}
         </div>
     </div>
         {% else%}
             <h1 style="color:red;"> Pas de demandes pour cet événement valider-demandes.html :-]
-        {%endif%}
+{%endif%}
+
+{% if accepted%}
+    <div class="eventscontainer">
+        <div class="card">
+            <th>Personnes Acceptés</th>
+            {% for event in accepted %}
+                <p><b><a href="{% url 'visit_profile' event.guest.user_id  %}">{{event.guest | title}}</a>
+
+            {% endfor %}
+        </div>
+    </div>
+        {% else%}
+            <h1 style="color:red;"> Pas de demandes pour cet événement valider-demandes.html :-]
+{%endif%}
 
 
 

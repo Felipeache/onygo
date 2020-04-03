@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView, CreateView
+#from django.views.generic import ListView, CreateView
 from random import randrange
 from .models import *
 from django.db.models import Q
@@ -133,10 +133,16 @@ def my_events(request, id):
 
 
 def validate(request, id):
-    event = Event.objects.get(id=id)
+    try:
+        event = Event.objects.get(id=id)
+    except ObjectDoesNotExist:
+        messages.error(request, f'Cet événement n\'existe pas!')
+        return redirect('index')
     if event.owner_id == request.user.id:
         events = EventJoin.objects.filter(event=id)
-        context = {'events': events}
+        accepted = EventJoin.objects.filter(event=id, accepted=True)
+        context = {'events': events, 'accepted' : accepted}
+
         return render(request, "core/valider-demandes.html", context)
     else:
         messages.error(request, f'Cet événement ne t\'appartiens pas!')
@@ -162,7 +168,7 @@ def search_event(request):
     u=UserProfile.objects.get(user_id=user_id)
     events = Event.objects.filter(city = u.city).order_by('date')
     context = {'events':events}
-    return render (request, 'core/chercher-evenement.html', context)
+    return render (request, 'core/liste-evenements.html', context)
 
 
 #class SearchEventList(ListView):

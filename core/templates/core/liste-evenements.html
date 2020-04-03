@@ -47,6 +47,7 @@
         <div class="paginator">
             <ul class="pagination">
             {% if paginator %}
+                {% if events.paginator.page_range > 1 %}
                 {% if events.has_previous %}
                         <li><a href="?page={{ events.previous_page_number }}">&laquo;</a></li>
                     {% else %}
@@ -60,11 +61,11 @@
                                 <li><a href="?page={{ i }}">{{ i }}</a></li>
                             {% endif %}
                     {% endfor %}
-
                     {% if events.has_next %}
                         <li><a href="?page={{ events.next_page_number }}">&raquo; </a></li>
                     {% else %}
                         <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
                     {% endif %}
             {% endif %}
 
