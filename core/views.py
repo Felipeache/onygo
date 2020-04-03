@@ -28,7 +28,7 @@ def search(request):
         paginator = Paginator(events, 5)
         page = request.GET.get('page')
         events = paginator.get_page(page)
-        #messages.success(request,f'Nous avons trouvé {qtty} événements {event}')
+        #messages.success(request,f'Nous avons trouvé {qtty} événements')
         return render(request, "core/chercher-evenement.html", {"events":events})
         #else:
         #    messages.error(request,f'Nos lutins n\'ont pas compris')
@@ -162,7 +162,7 @@ def search_event(request):
     u=UserProfile.objects.get(user_id=user_id)
     events = Event.objects.filter(city = u.city).order_by('date')
     context = {'events':events}
-    return render (request, 'core/liste-evenements.html', context)
+    return render (request, 'core/chercher-evenement.html', context)
 
 
 #class SearchEventList(ListView):
