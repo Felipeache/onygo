@@ -171,7 +171,7 @@ def search_event(request):
     return render (request, 'core/liste-evenements.html', context)
 
 
-#class SearchEventList(ListView):
+#class SearchEventList(ListView)::
 #    model = Event
 #    template_name = 'core/chercher-evenement.html'
 #    paginate_by = 5
