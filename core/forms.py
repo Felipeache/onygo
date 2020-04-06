@@ -15,6 +15,7 @@ class TimeInput(forms.DateInput):
     input_type = 'time'
 
 class Send_Message_Form(ModelForm):
+    
     text =  forms.CharField ( widget = forms.Textarea (
                         attrs={
                                 "rows":5,
@@ -26,11 +27,7 @@ class Send_Message_Form(ModelForm):
 
     class Meta:
         model = Message
-        fields = [
-                    'sender',
-                    'receiver',
-                    'text'
-        ]
+        fields = ['text']
 
 class Create_Event_Form(ModelForm):
     event_name = forms.CharField(min_length=4, max_length=25)

@@ -60,12 +60,11 @@ class Event(models.Model):
         )
 
     zip_code = models.CharField("Code postal", max_length=6,blank = False, null = False)
-    city =  models.CharField("Ville",max_length = 100, blank = False, null = False)
+    city = models.CharField("Ville",max_length = 100, blank = False, null = False)
     date = models.DateField("Date de l'événement",blank = False, null = False   )
     time = models.TimeField("Heure de l'événement",blank = False, null = False)
     is_active = models.BooleanField('Evénement Actif', default=True)
     is_full = models.BooleanField('Evénement complet', default=False)
-
 
     class Meta:
         verbose_name = "Evénement"

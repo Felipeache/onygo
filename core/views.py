@@ -180,22 +180,17 @@ def send_message(request, sender, receiver):
     if request.method == 'POST':
         form = Send_Message_Form(request.POST)
         if form.is_valid():
-            message = form.save(commit=False)
-            message.sender = request.user
-            message.receiver = receiver  ############
-            message.save()
-            messages.success(
-                                request,
-                                f'Merci {request.user}! ton message a été envoyé <3'
+            msg = Message(
+                        sender=UserProfile.objects.get(user_id=sender),
+                        receiver=UserProfile.objects.get(user_id=receiver),
+                        text = request.POST.get('text')
                         )
-            return redirect('index')
+            msg.save()
+            messages.success(request, 'Ton message a été envoyé!')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
             data['form'] = form
-            messages.error(request, form.errors)
-            messages.error(
-                            request,
-                            f'Oops {request.user}! ton événement n\'a pas été crée :C'
-                        )
+            messages.error(request,f'Oops {request.user}! ton message n\'a pas été envoyé :C', form.errors)
     return render(request, 'core/envoyer-message.html', data)
 
 
