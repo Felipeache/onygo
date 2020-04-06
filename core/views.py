@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from random import randrange
 from .models import *
 from django.db.models import Q
-from .forms import Create_Event_Form, CustomUserCreationForm, UserProfile_Form, EditProfileForm
+from .forms import Create_Event_Form, CustomUserCreationForm, UserProfile_Form, EditProfileForm, Send_Message_Form
 
 
 def view_404(request, *e):
@@ -175,6 +175,28 @@ def search_event(request):
 #    model = Event
 #    template_name = 'core/chercher-evenement.html'
 #    paginate_by = 5
+def send_message(request, sender, receiver):
+    data = {'form': Send_Message_Form()}
+    if request.method == 'POST':
+        form = Send_Message_Form(request.POST)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.sender = request.user
+            message.receiver = receiver  ############
+            message.save()
+            messages.success(
+                                request,
+                                f'Merci {request.user}! ton message a été envoyé <3'
+                        )
+            return redirect('index')
+        else:
+            data['form'] = form
+            messages.error(request, form.errors)
+            messages.error(
+                            request,
+                            f'Oops {request.user}! ton événement n\'a pas été crée :C'
+                        )
+    return render(request, 'core/envoyer-message.html', data)
 
 
 def apply(request, id):

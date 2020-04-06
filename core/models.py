@@ -114,7 +114,7 @@ class Message(models.Model):
                     on_delete = models.SET_NULL,
                     related_name='receiver'
         )
-    text = models.TextField('Message:', blank = True, null = False )
+    text = models.CharField('Message:', blank = True, null = False, max_length=500)
     sent = models.DateTimeField(auto_now=True)
     class Meta:
         verbose_name = "Message"

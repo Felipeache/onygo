@@ -19,7 +19,7 @@
             {% for event in events %}
             {% if event not in accepted%}
                 <p><b><a href="{% url 'visit_profile' event.guest.user_id  %}">{{event.guest | title}}</a> est intéresé(e)</b>
-                <b><button type="submit"><a href="{% url 'accept' event.guest.user_id event.id %}"></button></a> / </b>
+                <b><button type="submit"><a href="{% url 'accept' event.guest.user_id event.id %}">Accepter</button></a> / </b>
                 <b><button type="submit">Refuser</button></b>
                 {% else %}
                 <p><b><a href="{% url 'visit_profile' event.guest.user_id  %}">{{event.guest | title}}</a> a déjà été accpté(e)</b>
@@ -48,7 +48,8 @@
                 {% for event in accepted %}
                 <tr>
                 <td><p><b><a href="{% url 'visit_profile' event.guest.user_id  %}">{{event.guest | title}}</a></td>
-                <td><p><b><a href="{% url 'visit_profile' event.guest.user_id  %}">Envoyer un message</a></td>
+                <td><p><b><button type="submit"><a href="{% url 'send_message'  sender=user.id receiver=event.guest.user_id %}">Envoyer un message</a></button></td>
+                    <!-- <button type="submit"><a href="{% url 'send_message'  sender=user.id receiver=event.guest.user_id %}"> -->
                 </tr>
                 {% endfor %}
                 </tbody>

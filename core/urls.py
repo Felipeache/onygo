@@ -13,6 +13,7 @@ urlpatterns = [
     path('chercher/', search, name='search'),
     path('mes-evenements/<int:id>/', my_events, name='my_events'),
     path('creer-evenement/', create_event, name='create_event'),
+    path('envoyer-message/?sender=<sender>&receiver=<receiver>/', send_message, name='send_message'),
     path('chercher-evenement/', search_event, name='search_event'),
     path('register/', create_user, name='create_user'),
     path('mon-profil/', profile, name='profile'),

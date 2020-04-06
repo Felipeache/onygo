@@ -3,7 +3,7 @@ from django.db import models
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from datetime import datetime
-from .models import Event, UserProfile
+from .models import Event, UserProfile, Message
 from django.contrib.auth.models import User
 
 
@@ -14,11 +14,41 @@ class DateInput(forms.DateInput):
 class TimeInput(forms.DateInput):
     input_type = 'time'
 
+class Send_Message_Form(ModelForm):
+    text =  forms.CharField ( widget = forms.Textarea (
+                        attrs={
+                                "rows":5,
+                                "cols":20,
+                                "style": "resize: none"
+                                }
+                        )
+                    )
+
+    class Meta:
+        model = Message
+        fields = [
+                    'sender',
+                    'receiver',
+                    'text'
+        ]
 
 class Create_Event_Form(ModelForm):
     event_name = forms.CharField(min_length=4, max_length=25)
-    nber_of_places = forms.IntegerField(min_value=1, max_value=11)
+
+    nber_of_places = forms.IntegerField(min_value=1, max_value=11, widget=forms.NumberInput( attrs={'value':5}))
+
     zip_code = forms.IntegerField(min_value=11111, max_value=99999)
+
+    event_description =  forms.CharField (
+        widget = forms.Textarea (
+                        attrs={
+                                "rows":5,
+                                "cols":20,
+                                "style": "resize: none"
+                                }
+                        )
+                    )
+
 
     class Meta:
         model = Event
@@ -33,9 +63,16 @@ class Create_Event_Form(ModelForm):
                 'time',
                 ]
         widgets = {
-            'date': DateInput(),
-            'time': TimeInput(),
-            }
+            'date': DateInput(attrs={'value':datetime.now().date()}),
+            'time': forms.TimeInput(
+                                format='%HH:%MM',
+                                attrs={
+                                            'type': 'time',
+                                            'value': '08:00',
+                                            'step': 300
+                                        }
+                                    )
+                }
 
     def clean_date(self):
         today = datetime.now().date()  # tipo datetime
