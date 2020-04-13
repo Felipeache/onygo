@@ -24,10 +24,16 @@ SECRET_KEY = '@_f*^@8hd=sp%^fme^8clw2m4dx5qkvr4wzciu#yl9gnt=t(lp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+#Rediction apres Login et Logout:
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+#Deconection automatique après un temps d'inativité:
+TIME= 5*60
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+SESSION_EXPIRE_AT_BROWSER_CLOSE= True
+SESSION_COOKIE_AGE = TIME
+SESSION_IDLE_TIMEOUT = TIME
 
 
 # Application definition

@@ -15,11 +15,11 @@
 {% block content %}
 
 <div class="container">
-
         <form class="form" method="POST">
             {% csrf_token %}
             <div class="wrapper">
-                    {{form.as_p}}
+                <p> Message pour: {{ receiver | title }}</p>
+                {{form.as_p}}
             </div>
             <div class="btns-create-event">
                 <p>

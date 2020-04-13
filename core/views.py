@@ -120,7 +120,8 @@ def change_password(request):
         return render(request, 'core/change-password.html', context)
 
 
-def my_events(request, id):
+def my_events(request):
+    id = request.user.id
     event = get_object_or_404(Event, id=id)
     if event:
         events = Event.objects.filter(owner=request.user.id).order_by('date')
@@ -176,7 +177,7 @@ def search_event(request):
 #    template_name = 'core/chercher-evenement.html'
 #    paginate_by = 5
 def send_message(request, sender, receiver):
-    data = {'form': Send_Message_Form()}
+    data = {'form': Send_Message_Form(), 'receiver':UserProfile.objects.get(user_id=receiver)}
     if request.method == 'POST':
         form = Send_Message_Form(request.POST)
         if form.is_valid():
@@ -192,6 +193,57 @@ def send_message(request, sender, receiver):
             data['form'] = form
             messages.error(request,f'Oops {request.user}! ton message n\'a pas été envoyé :C', form.errors)
     return render(request, 'core/envoyer-message.html', data)
+
+
+def show_senders(request):
+    me = UserProfile.objects.get(user_id=request.user.id)
+    print("meeeeeeeeeeeeeeeeeeeeeee:",me)
+    context = []
+    msgs = Message.objects.filter( receiver_id = me ).values('sender').distinct()
+    print("**********************************")
+    print('mensajes encontrados:',msgs.count())
+    print("**********************************")
+    print("**********************************")
+    for sender in msgs:
+        print('FOR SENDER IN MSGS',sender,msgs,'context',context)
+        value=sender.values()
+        print('value = sender.values()',value)
+        for id in value:
+            context +=UserProfile.objects.filter(id = id)
+            print('msgs',msgs,'context',context)
+    print("**********************************")
+    print('me',me,'msgs:', msgs, 'value:',  'context:', context)
+    print("**********************************")
+    print("**********************************")
+    print("**********************************")
+    print("**********************************")
+    return render(request, "core/inbox.html", {'context':context} )
+
+def show_messages(request,sender):
+    me= UserProfile.objects.get(user_id=request.user.id)
+    sender = sender
+    print('**********************SENDER**********',sender)
+    context = Message.objects.filter( receiver = me).filter(sender=sender).values('text','sender').order_by('sent')
+
+
+    return render(request, "core/show-message.html", {"context":context})
+
+#def show_messages(request):
+    me= request.user.id
+    msgs = Message.objects.filter( receiver_id = me ).values('text','sender').order_by('sent')
+    print("**********************************")
+    print("**********************************")
+    print('mi codigo es:', me, 'el msje es:',msgs)
+    print("**********************************")
+    print("**********************************")
+    print("**********************************")
+    print("**********************************")
+
+
+    return render(request, "core/mes-messages.html", {"msgs":msgs})
+
+
+
 
 
 def apply(request, id):

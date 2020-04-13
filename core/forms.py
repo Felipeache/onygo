@@ -15,7 +15,7 @@ class TimeInput(forms.DateInput):
     input_type = 'time'
 
 class Send_Message_Form(ModelForm):
-    
+
     text =  forms.CharField ( widget = forms.Textarea (
                         attrs={
                                 "rows":5,
@@ -65,7 +65,7 @@ class Create_Event_Form(ModelForm):
                                 format='%HH:%MM',
                                 attrs={
                                             'type': 'time',
-                                            'value': '08:00',
+                                            'value': '19:00',
                                             'step': 300
                                         }
                                     )

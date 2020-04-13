@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+{% load static%}
+
+{% block title%}
+    Mes Evénements
+{% endblock title%}
+
+
+{% block headimg%}
+{% endblock headimg%}
+
+<h2> Boite de réception</h2>
+
+{%block content%}
+{% if msgs%}
+    <div class="eventscontainer">
+        {% for msg in msgs %}
+                <div>
+                <div class="card">
+                <p>Expediteur {{ msg.sender | title}}<p>
+                <p><b>{{ msg.text | title}}</b>
+                </div>
+                </div>
+        {% endfor %}
+
+        {% else%}
+            <h1 style="color:red;"> Pas de demandes pour cet événement valider-demandes.html :-]
+{%endif%}
+
+
+
+
+{%endblock content%}

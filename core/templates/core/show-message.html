@@ -1,0 +1,34 @@
+{% extends 'base.html'%}
+{% load static%}
+
+{% block title%}
+    Mes Evénements
+{% endblock title%}
+
+
+{% block headimg%}
+{% endblock headimg%}
+
+<h2> Boite de réception</h2>
+
+{%block content%}
+{% if context%}
+    <div class="eventscontainer">
+        <div>
+        <div class="card">
+        {% for message in context %}
+        <p>:{{message.text}}</p>
+
+        {% endfor %}
+        </div>
+        </div>
+
+
+        {% else%}
+            <h1 style="color:red;"> Pas de messages
+{%endif%}
+
+
+
+
+{%endblock content%}

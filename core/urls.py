@@ -11,7 +11,9 @@ handler404 = 'core.views.view_404'
 urlpatterns = [
     path('', home, name='index'),
     path('chercher/', search, name='search'),
-    path('mes-evenements/<int:id>/', my_events, name='my_events'),
+    path('mes-evenements/', my_events, name='my_events'),
+    path('mes-messages/<int:sender>/', show_messages, name='show_messages'),
+    path('inbox/', show_senders, name='show_senders'),
     path('creer-evenement/', create_event, name='create_event'),
     path('envoyer-message/?sender=<sender>&receiver=<receiver>/', send_message, name='send_message'),
     path('chercher-evenement/', search_event, name='search_event'),
