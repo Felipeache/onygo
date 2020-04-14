@@ -221,14 +221,19 @@ def show_senders(request):
 
 def show_messages(request,sender):
     me= UserProfile.objects.get(user_id=request.user.id)
-    sender = sender
-    print('**********************SENDER**********',sender, "meeeeeeeeeeeeeeeeeeeee", request.user.id)
-    received = Message.objects.filter( receiver = me ).filter(sender=sender).values('text','sent').order_by('sent')
-    sent = Message.objects.filter( sender = me).filter(receiver = sender ).values('text','sent').order_by('sent')
+    #sender= UserProfile.objects.get(user_id=sender)
+    #print('**********************SENDER**********',sender, "meeeeeeeeeeeeeeeeeeeee", request.user.id)
+    #received = Message.objects.filter( receiver = me ).filter(sender=sender).values('text','sent').order_by('sent')
+    #sent_msg = Message.objects.filter( sender_id = me).filter(sender_id=sender)
+    #print('**********************SENTTT**********',sent_msg)
+    #sender = UserProfile.objects.get(user_id = sender)
+    received = Message.objects.filter(Q(sender = sender) & Q(receiver = me)).values('sent', 'text').order_by('sent')
+    sent_msg = Message.objects.filter(Q(sender = me)).values('sent', 'text').order_by('sent')
     sender = UserProfile.objects.get(user_id = sender)
-    print("SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEENT", sent)
+    print('**********************SENTTT_msg**********',sent_msg)
 
-    return render(request, "core/show-message.html", {"received":received , "sent":sent, "sender":sender})
+
+    return render(request, "core/show-message.html", {"received":received ,"sent_msg":sent_msg, "sender":sender})
 
 #def show_messages(request):
 #    me= request.user.id

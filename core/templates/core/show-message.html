@@ -17,12 +17,13 @@
         <div>
         <div class="card">
         {% for msg in received %}
-        
-        <p>{{sender}} le {{msg.sent}}:</p>
-        <p>{{msg.text}}</p>
-        <p>Moi le {{sent.sent}}:</p>
-        <p>{{sent.text}}</p>
-        <hr class="msgs">
+                <p>{{sender}}, le {{msg.sent}}:</p>
+                <p>{{msg.text}}</p>
+                <hr class="msgs">
+        {% endfor %}
+        {% for snt in sent_msg %}
+            <p>Moi, le {{snt.sent}}:</p>
+            <p>{{snt.text}}</p>
         {% endfor %}
         <form class="search-box" method="POST"  action="{% url 'send_message' sender=request.user.id receiver=sender.id  %}">
             {%csrf_token%}
