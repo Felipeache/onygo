@@ -16,6 +16,16 @@ html {
     color: var(--text-color);
 }
 
+hr.msgs {
+    border: 0;
+    height: 0; /* Firefox... */
+    box-shadow: 0 0 10px 1px var(--text-color);
+}
+hr.msgs :after {  /* Not really supposed to work, but does */
+    content: "\00a0";  /* Prevent margin collapse */
+}
+
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */

@@ -222,25 +222,27 @@ def show_senders(request):
 def show_messages(request,sender):
     me= UserProfile.objects.get(user_id=request.user.id)
     sender = sender
-    print('**********************SENDER**********',sender)
-    context = Message.objects.filter( receiver = me).filter(sender=sender).values('text','sender').order_by('sent')
+    print('**********************SENDER**********',sender, "meeeeeeeeeeeeeeeeeeeee", request.user.id)
+    received = Message.objects.filter( receiver = me ).filter(sender=sender).values('text','sent').order_by('sent')
+    sent = Message.objects.filter( sender = me).filter(receiver = sender ).values('text','sent').order_by('sent')
+    sender = UserProfile.objects.get(user_id = sender)
+    print("SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEENT", sent)
 
-
-    return render(request, "core/show-message.html", {"context":context})
+    return render(request, "core/show-message.html", {"received":received , "sent":sent, "sender":sender})
 
 #def show_messages(request):
-    me= request.user.id
-    msgs = Message.objects.filter( receiver_id = me ).values('text','sender').order_by('sent')
-    print("**********************************")
-    print("**********************************")
-    print('mi codigo es:', me, 'el msje es:',msgs)
-    print("**********************************")
-    print("**********************************")
-    print("**********************************")
-    print("**********************************")
-
-
-    return render(request, "core/mes-messages.html", {"msgs":msgs})
+#    me= request.user.id
+#    msgs = Message.objects.filter( receiver_id = me ).values('text','sender').order_by('sent')
+#    print("**********************************")
+#    print("**********************************")
+#    print('mi codigo es:', me, 'el msje es:',msgs)
+#    print("**********************************")
+#    print("**********************************")
+#    print("**********************************")
+#    print("**********************************")
+#
+#
+#    return render(request, "core/mes-messages.html", {"msgs":msgs})
 
 
 

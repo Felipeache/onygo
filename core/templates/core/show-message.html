@@ -12,14 +12,24 @@
 <h2> Boite de réception</h2>
 
 {%block content%}
-{% if context%}
+{% if received%}
     <div class="eventscontainer">
         <div>
         <div class="card">
-        {% for message in context %}
-        <p>:{{message.text}}</p>
-
+        {% for msg in received %}
+        
+        <p>{{sender}} le {{msg.sent}}:</p>
+        <p>{{msg.text}}</p>
+        <p>Moi le {{sent.sent}}:</p>
+        <p>{{sent.text}}</p>
+        <hr class="msgs">
         {% endfor %}
+        <form class="search-box" method="POST"  action="{% url 'send_message' sender=request.user.id receiver=sender.id  %}">
+            {%csrf_token%}
+            <input type="text" name="text" class="search-input" placeholder="Répondre">
+            <input type="submit" class="boton" value="Envoyer">
+
+        </form>
         </div>
         </div>
 
