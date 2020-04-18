@@ -20,7 +20,8 @@ class Send_Message_Form(ModelForm):
                         attrs={
                                 "rows":5,
                                 "cols":20,
-                                "style": "resize: none"
+                                "style": "resize: none",
+                                "placeholder": "Ecris ton message..."
                                 }
                         )
                     )
@@ -30,18 +31,20 @@ class Send_Message_Form(ModelForm):
         fields = ['text']
 
 class Create_Event_Form(ModelForm):
-    event_name = forms.CharField(min_length=4, max_length=25)
+    event_name = forms.CharField(min_length=4, max_length=25, widget=forms.NumberInput( attrs={'placeholder':'Title de ton événement...'}))
 
     nber_of_places = forms.IntegerField(min_value=1, max_value=11, widget=forms.NumberInput( attrs={'value':5}))
 
-    zip_code = forms.IntegerField(min_value=11111, max_value=99999)
+    zip_code = forms.IntegerField(min_value=11111, max_value=99999,widget=forms.NumberInput( attrs={'placeholder':'75001'}))
 
     event_description =  forms.CharField (
         widget = forms.Textarea (
                         attrs={
                                 "rows":5,
                                 "cols":20,
-                                "style": "resize: none"
+                                "style": "resize: none",
+                                "placeholder": 'Décris ton événement....'
+
                                 }
                         )
                     )
@@ -50,6 +53,7 @@ class Create_Event_Form(ModelForm):
     class Meta:
         model = Event
         fields = [
+
                 'event_name',
                 'event_description',
                 'nber_of_places',
@@ -99,8 +103,15 @@ class CustomUserCreationForm(UserCreationForm):
                     'first_name',
                     'last_name',
                     'password1',
-                    'password2'
+                    'password2',
                 ]
+        help_texts = {
+            'username': None,
+            'email': None,
+            'first_name': None,
+            'last_name': None,
+        }
+
 
     def save(self, commit=True):
         user = super(CustomUserCreationForm, self).save(commit=False)
@@ -129,3 +140,7 @@ class EditProfileForm(UserChangeForm):
 class ChangePasswordForm(PasswordChangeForm):
     class Meta:
         model = User
+        help_texts = {
+            'password1': None,
+            'password2': None,
+        }

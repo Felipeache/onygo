@@ -112,8 +112,7 @@ def change_password(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Ton mot de passe a été changé :)")
-            return redirect(request, 'core/profile')
-
+            return redirect('index')
     else:
         form = PasswordChangeForm(user=request.user)
         context = {'form': form}

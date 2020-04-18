@@ -1,27 +1,25 @@
 {% extends 'base.html'%}
 {% load static%}
 
-{% block title%}
-    Mes Evévements
-{% endblock title%}
+{% block title %}
+    Editer Profile
+{% endblock title %}
 
 {% block headimg%}
 {% endblock headimg%}
 
 {% block content %}
+
 <h1> Edit Mon Profile</h1>
 <div class="container">
-    <form method="POST" enctype="multipart/form-data">
+    <form class="form" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
         <div class="wrapper">
-            {% csrf_token %}
-            <p>
-                {{form.as_p}}
-                {{ profileForm.as_p}}
-                <button type="submit">Mofidier</button>
-            </p>
-
+            <p> {{form.as_p}} </p>
+            <p> {{ profileForm.as_p}} </p>
+        </div>
+        <div class="generic-bouton"><input type="submit" class="boton" value="Sauvegarder"></div>
+    </form>
 </div>
-
-
 
 {% endblock content %}

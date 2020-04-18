@@ -49,7 +49,8 @@
                 <tr>
                 <td><p><b><a href="{% url 'visit_profile' event.guest.user_id  %}">{{event.guest | title}}</a></td>
                 <td><p><b><button type="submit"><a href="{% url 'send_message'  sender=user.id receiver=event.guest.user_id %}">Envoyer un message</a></button></td>
-                    <!-- <button type="submit"><a href="{% url 'send_message'  sender=user.id receiver=event.guest.user_id %}"> -->
+                    <!-- <button type="submit"><a href="{% url 'send_message'  sender=user.id receiver=event.guest.user_id %}">
+                <td><p><b><button type="submit"><a href="{% url 'send_message'  sender=user.id receiver=event.guest.user_id %}">Envoyer un message</a></button></td>-->
                 </tr>
                 {% endfor %}
                 </tbody>

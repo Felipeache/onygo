@@ -14,7 +14,6 @@
 {%block content%}
 {% if received%}
     <div class="eventscontainer">
-        <div>
         <div class="card">
         {% for msg in received %}
                 <p>{{sender}}, le {{msg.sent}}:</p>
@@ -24,6 +23,7 @@
         {% for snt in sent_msg %}
             <p>Moi, le {{snt.sent}}:</p>
             <p>{{snt.text}}</p>
+            <hr class="msgs">
         {% endfor %}
         <form class="search-box" method="POST"  action="{% url 'send_message' sender=request.user.id receiver=sender.id  %}">
             {%csrf_token%}

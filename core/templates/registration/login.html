@@ -1,16 +1,23 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>LOGIN</title>
-    </head>
-    <body>
+{% extends 'core/index.html'%}
+{% load static%}
+
+{% block content %}
+<div class="eventscontainer">
+        <div class="card">
         <h2>L O G I N</h2>
-        <form action="" method="POST">
+        OnyGo<br><br><br>
+        <form class="form" method="POST">
             {%csrf_token%}
             <table>
                 {{form.as_table}}
-            </table>
-            <input type="submit" value="Login">
-    </body>
-</html>
+            </table><br><br>
+            <div class="cardfooter">
+                <b><button class="generic-bouton" type="submit">L o g i n</a></b>
+            </div><br><br>
+            <div class="cardfooter">
+                <b><a class="generic-bouton" > J'ai oublié mon password</a></b>
+            </div><br><br><b>
+
+        </div>
+</div>
+{% endblock content %}
