@@ -359,7 +359,7 @@ li a:hover{
     border-radius: 10px;
 }
 
-button.generic-bouton, a.generic-bouton {
+button.generic-bouton, a.generic-bouton, input.generic-bouton {
     margin: auto;
     font-weight: bold;
     font-size: 1rem;
@@ -370,7 +370,6 @@ button.generic-bouton, a.generic-bouton {
     border-color: #08605f;
     padding: 1vh;
     border-radius: 10px;
-
 }
 
 button.generic-bouton:hover {
@@ -434,8 +433,8 @@ button.generic-bouton:hover {
 
     flex-direction: row;
     margin: 2vh auto;
-    padding: 0 5vw;
-    width: 40rem;
+    padding: 0.5vw;
+    width: auto;
 }
 
 p label {
@@ -448,7 +447,7 @@ p input {
     color : var(--text-color);
     font-weight: bold;
     font-family: : var(--text-font);
-    background-color: var(--bcg-color);
+    background-color: var(--card-bcgcolor);
     border-top: none;
     border-left: none;
     border-right: none;
@@ -460,7 +459,7 @@ p textarea {
     flex: 0.9;
     color : var(--text-color);
     font-family: : var(--text-font);
-    background-color: var(--bcg-color);
+    background-color: var(--card-bcgcolor);
     border: solid 1px var(--text-color);
     padding: 1rem;
     outline: none;
