@@ -23,7 +23,9 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
-    path('accounts/', include('django.contrib.auth.urls'))
+    path('accounts/', include('django.contrib.auth.urls')),
+    # REST FRAMEWORK URLS:
+    path('api/events/', include('core.api.urls', 'api'))
 ]
 
 admin.site.site_header = "OnyGo / ADMIN PANEL"
