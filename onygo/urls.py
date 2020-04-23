@@ -25,7 +25,8 @@ urlpatterns = [
     path('', include('core.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     # REST FRAMEWORK URLS:
-    path('api/events/', include('core.api.urls', 'api'))
+    path('api/events/', include('core.api.urls', 'api')),
+    path('api/register/', include('core.api.urls', 'RegistrationViewset'))
 ]
 
 admin.site.site_header = "OnyGo / ADMIN PANEL"

@@ -2,7 +2,7 @@ from django.urls import include
 from django.conf import settings
 from django.conf.urls import handler404
 from django.conf.urls.static import static
-from django.urls import re_path,path
+from django.urls import re_path, path
 from .views import *
 
 handler404 = 'core.views.view_404'
