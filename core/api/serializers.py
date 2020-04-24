@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from datetime import datetime
+
 from django.contrib.auth.models import User
 
 from core.models import Event, UserProfile
@@ -20,13 +20,16 @@ class CreateUserSerializer(serializers.ModelSerializer):
             last_name = self.validated_data['last_name'],
             email = self.validated_data['email'],
         )
+
         password = self.validated_data['password']
         password2 = self.validated_data['password2']
 
         if password != password2:
             raise serializers.ValidationError({'password':'Les passwords ne correspondent pas'})
         user.set_password(password)
+        userprofile = UserProfile(user=user, user_description="Modifie ton profil", city="Modifie ton profil")
         user.save()
+        userprofile.save()
         return user
 
 
