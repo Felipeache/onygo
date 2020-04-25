@@ -32,14 +32,18 @@ class CreateUserSerializer(serializers.ModelSerializer):
         userprofile.save()
         return user
 
+class ProfilSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('pk', 'email', 'username')
+
 
 
 class EventSerializer(serializers.ModelSerializer):
+    owner = serializers.SerializerMethodField('get_owner_name')
     class Meta:
         model = Event
-        fields = '__all__'
-    def save(self):
-        ev = Event(
-            date = self.validated_data['date'],
-            time = self.validated_data['time']
-        )
+        fields = ('city', 'owner', 'event_name', 'event_description', 'date', 'time')
+    def get_owner_name(self, Event):
+        owner = Event.owner.username
+        return owner
