@@ -121,7 +121,7 @@ def create_user_viewset(request):
         data = serializer.errors
     return Response(data)
 
-@api_view(['GET',])
+@api_view(['POST',])
 @permission_classes((IsAuthenticated,))
 def profil_view(request):
     try:

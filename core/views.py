@@ -30,11 +30,12 @@ def search(request):
         events = paginator.get_page(page)
         #messages.success(request,f'Nous avons trouvé {qtty} événements')
         return render(request, "core/chercher-evenement.html", {"events":events})
+        
         #else:
         #    messages.error(request,f'Nos lutins n\'ont pas compris')
         #    return render(request, "core/chercher-evenement.html")
     else:
-        messages.success(request, "todos los eventos de tu ciudad:")
+        messages.success(request, "Tous les événements de ta ville ")
         return (search_event(request))
 
 

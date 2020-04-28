@@ -31,7 +31,16 @@ class Send_Message_Form(ModelForm):
         fields = ['text']
 
 class Create_Event_Form(ModelForm):
-    event_name = forms.CharField(min_length=4, max_length=25, widget=forms.NumberInput( attrs={'placeholder':'Title de ton événement...'}))
+    event_name = forms.CharField(
+    min_length=4, max_length=45, widget=forms.Textarea(
+                                attrs={
+                                    "rows":1,
+                                    "cols":1,
+                                    "style": "resize: none",
+                                    'placeholder':'Title de ton événement...'
+                                    }
+                        )
+    )
 
     nber_of_places = forms.IntegerField(min_value=1, max_value=11, widget=forms.NumberInput( attrs={'value':5}))
 
@@ -110,6 +119,8 @@ class CustomUserCreationForm(UserCreationForm):
             'email': None,
             'first_name': None,
             'last_name': None,
+            'password1': None,
+            'password2': None,
         }
 
 

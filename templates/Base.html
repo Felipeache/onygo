@@ -15,7 +15,7 @@
                 {% if messages %}
                     {% for message in messages %}
                         <span class="alert-{{ message.tags }}">
-                            {{message}}
+                            <p style="margin: 4vw;">{{message}}</p>
                             <div class="closebtn" onclick="this.parentElement.style.display='none';">&times;</div>
                             </div>
                         </span>
