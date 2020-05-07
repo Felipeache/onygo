@@ -77,6 +77,9 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance:textfield; /* Firefox */
 }
+
+
+
 /* CSS pour le monstre de la 404 */
 
 .beast {
@@ -343,8 +346,32 @@ li a:hover{
   transition: 0.3s;
   padding: 4Vh ;
   width: auto;
-  height: auto;
+  max-height: 29rem;
+
   margin: 10vh auto 0 auto;
+  border-radius: 10px;
+  overflow-y: hidden;
+  overflow: scroll;
+
+}
+
+.card::-webkit-scrollbar {
+  width: 0.8rem;
+  border-radius: 10px;
+  background: var(--card-bcgcolor);
+}
+.card::-webkit-scrollbar-corner{
+    display: none;
+
+}
+
+.card::-webkit-scrollbar-track {
+  background: var(--card-bcgcolor);
+  border-radius: 10px;
+}
+
+.card::-webkit-scrollbar-thumb {
+  background-color: tomato ;
   border-radius: 10px;
 }
 

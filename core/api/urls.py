@@ -17,7 +17,7 @@ urlpatterns = [
 
     # Event model:
     path('', EnventsListApi.as_view(), name='events_list_api'),
-    path('<int:id>/', get_event_viewset, name='get_event_viewset'),
+    path('<int:id>', get_event_viewset, name='get_event_viewset'),
     path('<int:id>/update/', update_event_viewset, name='update_event_viewset'),
     path('<int:id>/delete/', delete_event_viewset, name='delete_event_viewset'),
     path('create/', create_event_viewset, name='create_event_viewset'),

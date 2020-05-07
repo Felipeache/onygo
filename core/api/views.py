@@ -16,16 +16,16 @@ from rest_framework.response import Response
 class EnventsListApi(ListAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
+    #authentication_classes = (TokenAuthentication,)
+    #permission_classes = (IsAuthenticated,)
     pagination_class = PageNumberPagination
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ('event_name', 'event_description','city') #owner__username
-    ordering_fields = ()
+    #ordering_fields = ()
 
 
 @api_view(['GET',])
-@permission_classes((IsAuthenticated, ))
+#@permission_classes((IsAuthenticated, ))
 def event_list_viewset(request):
     try:
         events = Event.objects.all()
@@ -36,7 +36,7 @@ def event_list_viewset(request):
 
 
 @api_view(['GET',])
-@permission_classes((IsAuthenticated, ))
+#@permission_classes((IsAuthenticated, ))
 def get_event_viewset(request, id):
     try:
         events = Event.objects.get(id=id)
@@ -47,7 +47,7 @@ def get_event_viewset(request, id):
 
 
 @api_view(['PUT',])
-@permission_classes((IsAuthenticated, ))
+#@permission_classes((IsAuthenticated, ))
 def update_event_viewset(request, id):
     try:
         event = Event.objects.get(id=id)
@@ -81,7 +81,7 @@ def delete_event_viewset(request, id):
         return Response(serializers.errors, data=data)
 
 @api_view(['POST',])
-@permission_classes((IsAuthenticated, ))
+#@permission_classes((IsAuthenticated, ))
 def create_event_viewset(request):
     user = request.user
     ev = Event(owner=user)
@@ -105,7 +105,7 @@ def create_event_viewset(request):
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['POST',])
+@api_view(['POST', 'OPTIONS',])
 def create_user_viewset(request):
     serializer = CreateUserSerializer(data=request.data)
     data = {}
@@ -122,7 +122,7 @@ def create_user_viewset(request):
     return Response(data)
 
 @api_view(['POST',])
-@permission_classes((IsAuthenticated,))
+#@permission_classes((IsAuthenticated,))
 def profil_view(request):
     try:
         user=request.user
