@@ -14,7 +14,9 @@ from rest_framework.response import Response
 
 
 class EnventsListApi(ListAPIView):
-    queryset = Event.objects.all()
+    #user_id=
+    #u = UserProfile.objects.get(user_id=user_id)
+    queryset = Event.objects.filter(city = "bogota").order_by('date')
     serializer_class = EventSerializer
     #authentication_classes = (TokenAuthentication,)
     #permission_classes = (IsAuthenticated,)
@@ -25,7 +27,7 @@ class EnventsListApi(ListAPIView):
 
 
 @api_view(['GET',])
-#@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated, ))
 def event_list_viewset(request):
     try:
         events = Event.objects.all()
@@ -105,7 +107,7 @@ def create_event_viewset(request):
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['POST', 'OPTIONS',])
+@api_view(['POST',])
 def create_user_viewset(request):
     serializer = CreateUserSerializer(data=request.data)
     data = {}
@@ -119,7 +121,7 @@ def create_user_viewset(request):
         data['token'] = token
     else:
         data = serializer.errors
-    return Response(data)
+        return Response(data)
 
 @api_view(['POST',])
 #@permission_classes((IsAuthenticated,))
