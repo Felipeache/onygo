@@ -6,6 +6,11 @@
     --text-font: 'Comfortaa',serif;
 }
 
+#id_avatar{
+    padding: 1vh;
+    border-radius: 10px;
+}
+
 html {
     background-color: var(--bcg-color);
     scroll-behavior: smooth;
@@ -56,10 +61,9 @@ button {
     margin: 1rem;
     padding: 5px;
     border: none;
-
 }
-.helptext{
-  visibility: None;
+.container>.form>.wrapper ul{
+    display: none;
 }
 
 
@@ -73,6 +77,9 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance:textfield; /* Firefox */
 }
+
+
+
 /* CSS pour le monstre de la 404 */
 
 .beast {
@@ -156,6 +163,7 @@ h1 {
 }
 
 .wrapper {
+
     position: relative;
     top:70%;
     margin: 0 auto;
@@ -226,9 +234,9 @@ li a:hover{
 }
 
 .container {
-  /*display: flex;*/
+  display: flex;
   /*position: relative;*/
-  /*flex-flow: column;*/
+  flex-flow: column;
 
   flex-basis: 100%;
   height: auto;
@@ -245,14 +253,13 @@ li a:hover{
     padding: 10px;
     justify-content: center;
     border-radius: 10px;
-    margin: 0 auto;
+    margin: 5vh auto;
     width: 60%;
     height: auto;
     font-weight: bold;
     font-size: 2vw;
     font-family: var(--text-font);
     color: black;
-    line-height: 1;
     z-index: 99;
     box-shadow: 4px 3px 8px -1px   var(--text-color);
 }
@@ -284,10 +291,10 @@ li a:hover{
       flex-flow: wrap;
       /*flex-basis: 100%;*/
       height: auto;
-      weight: 30rem;
+      width:  30rem;
       justify-content: center;
       text-align: center;
-      align-items: center;
+      margin: 0 auto;
       align-content: center;
     }
 
@@ -295,17 +302,19 @@ li a:hover{
 .alert-success {
         background: #3FFFA2;
         display: flex;
-        align-items: baseline;
+        align-items: center;
+
         padding: 10px;
+
         opacity: 60%;
         border-radius: 10px;
-        width: 30%;
+        width: 60%;
         height: auto;
-        margin: 10rv auto 10rv auto;
+        margin: 100px;
         font-weight: bold;
-        font-size: 2vw;
+        font-size: 3vh;
         color: black;
-        line-height: 1;
+        line-height: 1.8;
         z-index: 99;
         box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
 }
@@ -317,13 +326,13 @@ li a:hover{
     padding: 10px;
     opacity: 60%;
     border-radius: 10px;
-    width: 30%;
-    margin: 0 auto 10vh auto;
+    width: 60%;
+    margin: 1vh auto 1vh auto;
     height: auto;
     font-weight: bold;
-    font-size: 2vw;
+    font-size: 3vh;
     color: black;
-    line-height: 1;
+    line-height: 1.8;
     z-index: 99;
     box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
 }
@@ -335,17 +344,40 @@ li a:hover{
   margin: 1rem;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  padding: 2rem;
-  width: 30rem;
-  height: auto;
+  padding: 4Vh ;
+  width: auto;
+  max-height: 29rem;
+
   margin: 10vh auto 0 auto;
   border-radius: 10px;
+  overflow-y: hidden;
+  overflow: scroll;
+
 }
+
+.card::-webkit-scrollbar {
+  width: 0.8rem;
+  border-radius: 10px;
+  background: var(--card-bcgcolor);
+}
+.card::-webkit-scrollbar-corner{
+    display: none;
+
+}
+
+.card::-webkit-scrollbar-track {
+  background: var(--card-bcgcolor);
+  border-radius: 10px;
+}
+
+.card::-webkit-scrollbar-thumb {
+  background-color: tomato ;
+  border-radius: 10px;
+}
+
 .cardfooter {
     height: auto;
     weight: auto;
-    display: flex;
-    justify-content: space-around;
 
 }
 .cardfooter a{
@@ -359,8 +391,9 @@ li a:hover{
     border-radius: 10px;
 }
 
-button.generic-bouton, a.generic-bouton {
+button.generic-bouton, a.generic-bouton, input.generic-bouton {
     margin: auto;
+    display: inline-flex;
     font-weight: bold;
     font-size: 1rem;
     height: 3rem;
@@ -370,7 +403,6 @@ button.generic-bouton, a.generic-bouton {
     border-color: #08605f;
     padding: 1vh;
     border-radius: 10px;
-
 }
 
 button.generic-bouton:hover {
@@ -408,14 +440,15 @@ button.generic-bouton:hover {
   color: #385E0C;
   font-weight: bold;
   float: right;
-  font-size: 30px;
-  line-height: 20px;
+  font-size: 4vh;
+  line-height: 2vh;
   cursor: pointer;
-  transition: 0.5s;
+  transition: 0.4s;
 }
 
 .closebtn:hover {
-  color: black;
+  color: #4F5D2F;
+  font-size: 10vh;
 
 }
 
@@ -430,12 +463,16 @@ button.generic-bouton:hover {
     margin: 10px;
     padding: 25px;
 }
+.form{
+    display: flex;
+    flex-direction: column;
+}
 .form p{
 
     flex-direction: row;
     margin: 2vh auto;
-    padding: 0 5vw;
-    width: 40rem;
+    padding: 0.5vw;
+    width: auto;
 }
 
 p label {
@@ -448,7 +485,7 @@ p input {
     color : var(--text-color);
     font-weight: bold;
     font-family: : var(--text-font);
-    background-color: var(--bcg-color);
+    background-color: var(--card-bcgcolor);
     border-top: none;
     border-left: none;
     border-right: none;
@@ -460,7 +497,7 @@ p textarea {
     flex: 0.9;
     color : var(--text-color);
     font-family: : var(--text-font);
-    background-color: var(--bcg-color);
+    background-color: var(--card-bcgcolor);
     border: solid 1px var(--text-color);
     padding: 1rem;
     outline: none;
@@ -578,14 +615,6 @@ section img:hover{
 
 /*  FIN SECTION 3 */
 
-
-
-
-
-
-
-
-
 /*  FOOTER  */
 footer {
     display: flex;
@@ -636,15 +665,46 @@ footer {
 @media screen and (max-width: 700px) {
 
      html {
-            font-size: 75%;
-            color: blue;
-            background-color: red;
-
+            flex-flow:  column;
+            font-size: 80%;
           }
     .container > article {
         flex-direction: column;
     }
+    button.generic-bouton, a.generic-bouton, input.generic-bouton{
+        margin: 0.5vh;
+    }
 
+    .wrapper{
+        display: flex;
+        flex-direction: column;
+        width:100%;
+        margin-top: 5vh;
+
+    }
+    .wrapper p{
+        display: contents;
+    }
+    p input{
+        flex: 2;
+    }
+    p textarea{
+        flex: 1.7;
+    }
+    p label, p input {
+        margin: 1vh;
+        padding: 1vh;
+
+    }
+
+    .search-container{
+        width: auto;
+    }
+    .alert-success, .alert-error{
+        margin: 1vh;
+        width: auto;
+        font-size: 150%
+    }
 
       #img1 {
         display: none;

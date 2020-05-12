@@ -9,17 +9,17 @@
 {% include 'core/search.html' %}
 
 {% if events %}
+<h1><p><center> Tes événements</center> </p></h1>
     <div class="eventscontainer">
             {% for line in events %}
             <div class="card">
-                    <br><br>
                     <b>Événement: </b>{{line.event_name}}<br><br>
                     <b>Description: </b>{{line.event_description}}<br><br>
                     <b>Proposé par:</b> {{line.owner}}<br><br><br>
 
                     <b>Adresse: </b>{{line.event_address}}<br>
                     <b>Date: </b>{{line.date}}<br><br>
-                    <div>
+                    <div class="cardfooter">
                         <h4><b>
                             <a href="{% url 'apply' id=line.id %}">Apply</a>
                         </b></h4>
@@ -47,8 +47,10 @@
                         {% endif %}
                     </ul>
             </div>
+    </div>
+
 {% else%}
-    <h1 style="color:red;"> NO EVENT YET CHERCHER-EVENEMENT.HTML</h1>
+    <h1 style="color:red;"> Tu n'as pas encore des événements</h1>
 {% endif %}
 
 

@@ -3,12 +3,16 @@ from django.contrib import admin
 from django.contrib.admin import ModelAdmin, register
 
 
+
+
 from .models import *
 
 class UserProfile_Admin(admin.ModelAdmin):
     search_fields = ["name", 'city']
     list_filter = ["city"]
     list_per_page = 3
+
+
 
 class ProfileInline(admin.StackedInline):
     model = UserProfile
