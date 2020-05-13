@@ -6,7 +6,7 @@ from git import Repo
 @csrf_exempt
 def update(request):
     if request.method == "POST":
-        repo = Repo("holiholi/")
+        repo = Repo("onygo/")
         origin = repo.remotes.origin
 
         origin.pull()
