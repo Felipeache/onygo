@@ -25,7 +25,7 @@ SECRET_KEY = '@_f*^@8hd=sp%^fme^8clw2m4dx5qkvr4wzciu#yl9gnt=t(lp'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 #Rediction apres Login et Logout:
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.39']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.39', 'holiholi.pythonanywhere.com']
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 #Deconection automatique après un temps d'inativité:
