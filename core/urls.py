@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from django.urls import re_path, path
 from .views import *
 
+
 handler404 = 'core.views.view_404'
 
 
