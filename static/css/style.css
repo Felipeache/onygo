@@ -709,6 +709,9 @@ footer {
       #img1 {
         display: none;
       }
+     .nav{
+         display: none
+     }
 
 
 }
