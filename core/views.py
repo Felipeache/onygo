@@ -8,7 +8,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 #from django.views.generic import ListView, CreateView
 from random import randrange
-from .models import *
+from .models import Message, Event, User, UserProfile, EventJoin
 from django.db.models import Q
 from .forms import Create_Event_Form, CustomUserCreationForm, UserProfile_Form, EditProfileForm, Send_Message_Form
 
@@ -30,7 +30,7 @@ def search(request):
         events = paginator.get_page(page)
         #messages.success(request,f'Nous avons trouvé {qtty} événements')
         return render(request, "core/chercher-evenement.html", {"events":events})
-        
+
         #else:
         #    messages.error(request,f'Nos lutins n\'ont pas compris')
         #    return render(request, "core/chercher-evenement.html")
@@ -219,17 +219,18 @@ def show_senders(request):
     print("**********************************")
     return render(request, "core/inbox.html", {'context':context} )
 
-def show_messages(request,sender):
+def show_messages(request,sender_id):
     me= UserProfile.objects.get(user_id=request.user.id)
+    sender = UserProfile.objects.get(user_id=sender_id)
     #sender= UserProfile.objects.get(user_id=sender)
     #print('**********************SENDER**********',sender, "meeeeeeeeeeeeeeeeeeeee", request.user.id)
     #received = Message.objects.filter( receiver = me ).filter(sender=sender).values('text','sent').order_by('sent')
     #sent_msg = Message.objects.filter( sender_id = me).filter(sender_id=sender)
     #print('**********************SENTTT**********',sent_msg)
     #sender = UserProfile.objects.get(user_id = sender)
-    received = Message.objects.filter(Q(sender = sender) & Q(receiver = me)).values('sent', 'text').order_by('sent')
-    sent_msg = Message.objects.filter(Q(sender = me)).values('sent', 'text').order_by('sent')
-    sender = UserProfile.objects.get(user_id = sender)
+    received = Message.objects.filter(sender=sender, receiver=me).distinct().values('sent', 'text').order_by('sent')
+    sent_msg = Message.objects.filter(sender=me, receiver=sender).distinct().values('sent', 'text').order_by('sent')
+
     print('**********************SENTTT_msg**********',sent_msg)
 
 
