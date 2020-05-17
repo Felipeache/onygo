@@ -207,7 +207,7 @@ def show_senders(request):
     senders = Message.objects.filter( receiver_id = me ).values('sender').distinct()
 
     for sender in senders:
-        context += UserProfile.objects.filter(id=sender)
+        context += UserProfile.objects.filter(id=sender.value())
 
     return render(request, "core/inbox.html", {'context':context})
 
