@@ -177,13 +177,17 @@ def search_event(request):
 #    template_name = 'core/chercher-evenement.html'
 #    paginate_by = 5
 def send_message(request, sender, receiver):
-    data = {'form': Send_Message_Form(), 'receiver':UserProfile.objects.get(user_id=receiver)}
+    sender = UserProfile.objects.get(user_id=sender)
+    receiver = UserProfile.objects.get(user_id=receiver)
+
+    data = {'form': Send_Message_Form(), 'receiver': receiver}
+
     if request.method == 'POST':
         form = Send_Message_Form(request.POST)
         if form.is_valid():
             msg = Message(
-                        sender=UserProfile.objects.get(user_id=sender),
-                        receiver=UserProfile.objects.get(user_id=receiver),
+                        sender=sender,
+                        receiver=receiver,
                         text = request.POST.get('text')
                         )
             msg.save()
@@ -199,25 +203,13 @@ def show_senders(request):
     me = UserProfile.objects.get(user_id=request.user.id)
     print("meeeeeeeeeeeeeeeeeeeeeee:",me)
     context = []
-    msgs = Message.objects.filter( receiver_id = me ).values('sender').distinct()
-    print("**********************************")
-    print('mensajes encontrados:',msgs.count())
-    print("**********************************")
-    print("**********************************")
-    for sender in msgs:
-        print('FOR SENDER IN MSGS',sender,msgs,'context',context)
-        value=sender.values()
-        print('value = sender.values()',value)
-        for id in value:
-            context +=UserProfile.objects.filter(id = id)
-            print('msgs',msgs,'context',context)
-    print("**********************************")
-    print('me',me,'msgs:', msgs, 'value:',  'context:', context)
-    print("**********************************")
-    print("**********************************")
-    print("**********************************")
-    print("**********************************")
-    return render(request, "core/inbox.html", {'context':context} )
+
+    senders = Message.objects.filter( receiver_id = me ).values('sender').distinct()
+
+    for sender in senders:
+        context += UserProfile.objects.filter(id=sender)
+
+    return render(request, "core/inbox.html", {'context':context})
 
 def show_messages(request, sender_id):
     me= UserProfile.objects.get(user_id=request.user.id)
