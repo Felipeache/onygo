@@ -232,7 +232,7 @@ def show_messages(request,sender_id):
     sent_msg = Message.objects.filter(sender=me, receiver=sender).distinct().values('sent', 'text').order_by('sent')
 
     print('**********************SENTTT_msg**********',sent_msg)
-
+#probando
 
     return render(request, "core/show-message.html", {"received":received ,"sent_msg":sent_msg, "sender":sender})
 
