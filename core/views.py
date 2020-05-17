@@ -219,7 +219,7 @@ def show_senders(request):
     print("**********************************")
     return render(request, "core/inbox.html", {'context':context} )
 
-def show_messages(request,sender_id):
+def show_messages(request, sender_id):
     me= UserProfile.objects.get(user_id=request.user.id)
     sender = UserProfile.objects.get(user_id=sender_id)
     #sender= UserProfile.objects.get(user_id=sender)
@@ -228,8 +228,8 @@ def show_messages(request,sender_id):
     #sent_msg = Message.objects.filter( sender_id = me).filter(sender_id=sender)
     #print('**********************SENTTT**********',sent_msg)
     #sender = UserProfile.objects.get(user_id = sender)
-    received = Message.objects.filter(sender=sender, receiver=me).distinct().values('sent', 'text').order_by('sent')
-    sent_msg = Message.objects.filter(sender=me, receiver=sender).distinct().values('sent', 'text').order_by('sent')
+    received = Message.objects.filter(sender_id=sender, receiver_id=me).distinct().values('sent', 'text').order_by('sent')
+    sent_msg = Message.objects.filter(sender_id=me, receiver_id=sender).distinct().values('sent', 'text').order_by('sent')
 
     print('**********************SENTTT_msg**********',sent_msg)
 #probando
