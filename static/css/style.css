@@ -25,6 +25,7 @@ html {
 
 #wrap {
   font-family: sans-serif;
+  display: none;
   font-size: 21px;
   line-height: 1.6;
   margin: 0;
