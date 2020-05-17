@@ -725,7 +725,7 @@ footer {
         margin: 0.5vh;
     }
 
-    .wrapper{
+    /* .wrapper{
         display: flex;
         flex-direction: column;
         width:100%;
@@ -734,7 +734,7 @@ footer {
     }
     .wrapper p{
         display: contents;
-    }
+    } */
     p input{
         flex: 2;
     }
