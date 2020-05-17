@@ -18,7 +18,7 @@
             <b>Messagerie<br><br><br>
         <div class="cardfooter">
         {% for sender in context %}
-                <a class="generic-bouton" href="{% url 'show_messages' sender.id  %}"><p>Expediteur : {{ sender | title}}</p></a>
+                <a class="generic-bouton" href="{% url 'show_messages' sender_id.id  %}"><p>Expediteur : {{ sender | title}}</p></a>
         {% endfor %}
         </div>
         </div>
