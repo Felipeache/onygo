@@ -1,42 +1,48 @@
 <header class="header">
-    <nav id="menu">
-        <ul>
-            {% if user.is_authenticated %}
-                <li> <a href="{% url 'index'%}">Home</a></li>
-                <li> <a href="{% url 'search' %}">Chercher un événement</a></li>
-                <li> <a href="{% url 'create_event' %}">Creer un événement</a></li>
-                <li> <a href="{% url 'my_events'  %}">Mes événements</a></li>
-                <div>
-                <li style="color:#FFFFFC"> Hello {{user.get_short_name | title}} !</li>
-                <center><li><a href="{% url 'profile' %}">Mon profil</li></a></center>
-            </div>
-                <li><a href="{% url 'logout' %}">Logout</a> </li>
-            {% else %}
-                <li><a href="{% url 'login' %}">Login</a> /
-                <a href="{% url 'create_user' %}">Sign in</a></li>
-            {% endif%}
-        </ul>
+    <nav role="navigation" >
+        <div class="desktop_menu">
+            <ul>
+                {% if user.is_authenticated %}
+                    <li> <a href="{% url 'index'%}">Home</a></li>
+                    <li> <a href="{% url 'search' %}">Chercher un événement</a></li>
+                    <li> <a href="{% url 'create_event' %}">Creer un événement</a></li>
+                    <li> <a href="{% url 'my_events'  %}">Mes événements</a></li>
+                    <div>
+                        <li style="color:#FFFFFC"> Hello {{user.get_short_name | title}} !</li>
+                        <center><li><a href="{% url 'profile' %}">Mon profil</li></a></center>
+                    </div>
+                    <li><a href="{% url 'logout' %}">Logout</a> </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a> /
+                        <a href="{% url 'create_user' %}">Sign in</a></li>
+                {% endif%}
+            </ul>
+        </div>
     </nav>
-<!-- <div id="wrap">
-  <header class="header">
-    <nav class="nav">
-      <a href="#wrap" id="open">
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="34px" height="27px" viewBox="0 0 34 27" enable-background="new 0 0 34 27" xml:space="preserve">
-            <rect fill="#FFFFFF" width="34" height="4"/>
-            <rect y="11" fill="#FFFFFF" width="34" height="4"/>
-            <rect y="23" fill="#FFFFFF" width="34" height="4"/>
-        </svg>
-      </a>
-      <a href="#" id="close">×</a>
-      <h1><a href="#">typo~typo</a></h1>
-      <a href="#">Helvetica</a>
-      <a href="#">Times New Roman</a>
-      <a href="#">Garamond</a>
-      <a href="#">Didot</a>
-      <a href="#">Franklin Gothic</a>
-      <a href="#">à propos</a>
-    </nav>
-  </header>
-</div> -->
+
+    <div class="menu-wrap">
+      <input type="checkbox" class="toggler">
+      <div class="hamburger"><div></div></div>
+      <div class="menu">
+        <div>
+          <div>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
 
 </header>
