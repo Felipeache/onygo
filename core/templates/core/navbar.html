@@ -3,14 +3,14 @@
         <div class="desktop_menu">
             <ul>
                 {% if user.is_authenticated %}
+                <li style="color:#FFFFFC" > Hello {{user.get_short_name | title}} !</li>
+
                     <li> <a href="{% url 'index'%}">Home</a></li>
                     <li> <a href="{% url 'search' %}">Chercher un événement</a></li>
                     <li> <a href="{% url 'create_event' %}">Creer un événement</a></li>
                     <li> <a href="{% url 'my_events'  %}">Mes événements</a></li>
-                    <div>
-                        <li style="color:#FFFFFC"> Hello {{user.get_short_name | title}} !</li>
-                        <center><li><a href="{% url 'profile' %}">Mon profil</li></a></center>
-                    </div>
+                    <li><a href="{% url 'profile' %}">Mon profil</li></a>
+                    <li><a href="{% url 'show_senders'%}">Messagerie</a></li>
                     <li><a href="{% url 'logout' %}">Logout</a> </li>
                 {% else %}
                     <li><a href="{% url 'login' %}">Login</a> /
@@ -27,10 +27,12 @@
         <div>
           <div>
             <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">Contact</a></li>
+              <li><a href="{% url 'index'%}">Home</a></li>
+              <li><a href="{% url 'search'%}">Chercher un événement</a></li>
+              <li><a href="{% url 'create_event'%}">Creer un événement</a></li>
+              <li><a href="{% url 'my_events'%}">Gerer mes événements</a></li>
+              <li><a href="{% url 'show_senders'%}">Messagerie</a></li>
+              <li><a href="{% url 'profile'%}">Mon profil</a></li>
             </ul>
           </div>
         </div>

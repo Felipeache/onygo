@@ -677,6 +677,9 @@ footer {
       height: 50px;
       opacity: 0;
     }
+    ul{
+        flex-direction: column;
+    }
 
     .menu-wrap .hamburger {
       position: absolute;
@@ -686,7 +689,7 @@ footer {
       width: 60px;
       height: 60px;
       padding: 1rem;
-      background: var(--primary-color);
+      background: darkcyan;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -732,6 +735,7 @@ footer {
     .menu-wrap .toggler:checked + .hamburger > div:after {
       top: 0;
       transform: rotate(90deg);
+
     }
 
     /* Rotate On Hover When Checked */
@@ -742,6 +746,7 @@ footer {
     /* Show Menu */
     .menu-wrap .toggler:checked ~ .menu {
       visibility: visible;
+
     }
 
     .menu-wrap .toggler:checked ~ .menu > div {
@@ -837,9 +842,7 @@ footer {
 }
 
 @media screen and (max-width: 500px) {
-    ul{
-        flex-direction: column;
-    }
+
     .menu-wrap .menu > div {
         height: 100%;
         border-radius: 0;
