@@ -389,6 +389,7 @@ li a:hover{
     display: grid;
     height: auto;
     width: max-content;
+    min-width: 1rem;
 
 
 }
