@@ -27,12 +27,18 @@
         <div>
           <div>
             <ul>
+            {% if user.is_authenticated %}
               <li><a href="{% url 'index'%}">Home</a></li>
               <li><a href="{% url 'search'%}">Chercher un événement</a></li>
               <li><a href="{% url 'create_event'%}">Creer un événement</a></li>
               <li><a href="{% url 'my_events'%}">Gerer mes événements</a></li>
               <li><a href="{% url 'show_senders'%}">Messagerie</a></li>
               <li><a href="{% url 'profile'%}">Mon profil</a></li>
+              <li><a href="{% url 'logout' %}">Logout</a> </li>
+             {% else %}
+             <li><a href="{% url 'login' %}">Login</a> /
+                 <a href="{% url 'create_user' %}">Sign in</a></li>
+
             </ul>
           </div>
         </div>
