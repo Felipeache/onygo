@@ -691,6 +691,7 @@ footer {
       padding: 1rem;
       background: darkcyan;
       display: flex;
+      filter: opacity(40%);
       align-items: center;
       justify-content: center;
     }
