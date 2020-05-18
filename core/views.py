@@ -10,6 +10,8 @@ from django.contrib.auth.decorators import login_required
 from random import randrange
 from .models import Message, Event, User, UserProfile, EventJoin
 from django.db.models import Q
+from itertools import chain
+from operator import attrgetter
 from .forms import Create_Event_Form, CustomUserCreationForm, UserProfile_Form, EditProfileForm, Send_Message_Form
 
 
@@ -177,11 +179,9 @@ def search_event(request):
 #    template_name = 'core/chercher-evenement.html'
 #    paginate_by = 5
 def send_message(request, sender, receiver):
-    sender = UserProfile.objects.get(user_id=sender)
-    receiver = UserProfile.objects.get(user_id=receiver)
-
-    data = {'form': Send_Message_Form(), 'receiver': receiver}
-
+    receiver = UserProfile.objects.get(id=receiver)
+    sender = UserProfile.objects.get(user_id=request.user.id)
+    data = {'form': Send_Message_Form(), 'receiver':receiver}
     if request.method == 'POST':
         form = Send_Message_Form(request.POST)
         if form.is_valid():
@@ -203,50 +203,67 @@ def show_senders(request):
     me = UserProfile.objects.get(user_id=request.user.id)
     print("meeeeeeeeeeeeeeeeeeeeeee:",me)
     context = []
+    msgs = Message.objects.filter( receiver_id = me ).values('sender').distinct()
+    print("**********************************")
+    print('mensajes encontrados:',msgs.count())
+    print("**********************************")
+    print("**********************************")
+    for sender in msgs:
+        print('FOR SENDER IN MSGS',sender,msgs,'context',context)
+        value=sender.values()
+        print('value = sender.values()',value)
+        for id in value:
+            context +=UserProfile.objects.filter(id = id)
+            print('msgs',msgs,'context',context)
+    print("**********************************")
+    print('me',me,'msgs:', msgs, 'value:',  'context:', context)
+    print("**********************************")
+    print("**********************************")
+    print("**********************************")
+    print("**********************************")
+    return render(request, "core/inbox.html", {'context':context} )
 
-    senders = Message.objects.filter( receiver_id = me ).values('sender').distinct()
-
-    for sender in senders:
-        context += UserProfile.objects.filter(id=sender['sender'])
-
-    return render(request, "core/inbox.html", {'context':context})
 
 def show_messages(request, sender_id):
-    me= UserProfile.objects.get(user_id=request.user.id)
+
+    me = UserProfile.objects.get(user_id=request.user.id)
     sender = UserProfile.objects.get(user_id=sender_id)
-    #sender= UserProfile.objects.get(user_id=sender)
-    #print('**********************SENDER**********',sender, "meeeeeeeeeeeeeeeeeeeee", request.user.id)
-    #received = Message.objects.filter( receiver = me ).filter(sender=sender).values('text','sent').order_by('sent')
-    #sent_msg = Message.objects.filter( sender_id = me).filter(sender_id=sender)
-    #print('**********************SENTTT**********',sent_msg)
-    #sender = UserProfile.objects.get(user_id = sender)
-    received = Message.objects.filter(sender_id=sender, receiver_id=me).distinct().values('sent', 'text').order_by('sent')
-    sent_msg = Message.objects.filter(sender_id=me, receiver_id=sender).distinct().values('sent', 'text').order_by('sent')
+    received_msgs = []
+    sent_msgs = []
+    received_msgs = Message.objects.filter(
+                    sender=sender,
+                    receiver=me).distinct().values(
+                    'sent',
+                    'text',
+                    'sender').order_by('sent')
+    sent_msgs = Message.objects.filter(
+                    sender=me,
+                    receiver=sender).distinct().values(
+                    'sent',
+                    'text',
+                    'sender').order_by('sent')
+    msgs_list = list(chain(received_msgs, sent_msgs))
 
-    print('**********************SENTTT_msg**********',sent_msg)
-#probando
-
-    return render(request, "core/show-message.html", {"received":received ,"sent_msg":sent_msg, "sender":sender})
-
-#def show_messages(request):
-#    me= request.user.id
-#    msgs = Message.objects.filter( receiver_id = me ).values('text','sender').order_by('sent')
-#    print("**********************************")
-#    print("**********************************")
-#    print('mi codigo es:', me, 'el msje es:',msgs)
-#    print("**********************************")
-#    print("**********************************")
-#    print("**********************************")
-#    print("**********************************")
-#
-#
-#    return render(request, "core/mes-messages.html", {"msgs":msgs})
+    print("")
+    print("")
+    print("")
+    print("")
+    print("")
+    print("")
+    print("ATENCION AQUI ESTA LA LISTA:", msgs_list)
+    print("")
+    print("")
+    print("")
+    print("")
+    print("")
+    print("")
 
 
-
+    return render(request, "core/show-message.html", {"msgs_list":msgs_list,"sent_msgs":sent_msgs, "sender":sender})
 
 
 def apply(request, id):
+
     user_name = request.user.first_name
     user_id = request.user.id
     if request.method == 'GET':

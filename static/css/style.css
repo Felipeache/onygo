@@ -4,6 +4,7 @@
     --form-layout-color: #3d75ef;
     --card-bcgcolor: #AEC5EB;
     --text-font: 'Comfortaa',serif;
+    --white-font: #FAF8F4;
 }
 
 #id_avatar{
@@ -203,8 +204,10 @@ input[type=number] {
  }
 
 p {
-    display: flex;
+    display: grid;
     align-items: center;
+    margin: 1vh;
+    padding: 1vh;
 
 }
 h1 {
@@ -214,10 +217,11 @@ h1 {
 
 .wrapper {
 
-    position: relative;
+    display: block;
     top:70%;
     margin: 0 auto;
-    width: 60rem;
+    padding: 2rem;
+    width: 50vw;
 }
 
 
@@ -396,7 +400,7 @@ li a:hover{
   transition: 0.3s;
   padding: 4Vh ;
   width: auto;
-  max-height: 29rem;
+  max-height: 36rem;
 
   margin: 10vh auto 0 auto;
   border-radius: 10px;
@@ -426,8 +430,13 @@ li a:hover{
 }
 
 .cardfooter {
+    padding: 1vh;
+    margin: 0 auto;
+    justify-content: space-evenly;
+    display: grid;
     height: auto;
-    weight: auto;
+    width: max-content;
+
 
 }
 .cardfooter a{
@@ -442,8 +451,8 @@ li a:hover{
 }
 
 button.generic-bouton, a.generic-bouton, input.generic-bouton {
-    margin: auto;
-    display: inline-flex;
+    margin: 1vh;
+    display: grid;
     font-weight: bold;
     font-size: 1rem;
     height: 3rem;
@@ -516,6 +525,7 @@ button.generic-bouton:hover {
 .form{
     display: flex;
     flex-direction: column;
+    background-color:  #ff11;
 }
 .form p{
 
@@ -527,31 +537,27 @@ button.generic-bouton:hover {
 
 p label {
     flex: 1;
+    margin: 1vh;
+    padding: 1vh;
     align-items: baseline;
+    color: var(--white-font);
+    font-weight: bold;
 }
 
-p input {
+p input, p textarea {
     flex: 1;
-    color : var(--text-color);
+    align-items: center;
+    padding: 6px;
+    border-radius: 10px;
+    color : var(--white-font);
     font-weight: bold;
     font-family: : var(--text-font);
-    background-color: var(--card-bcgcolor);
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: solid;
+    background-color: var(--bcg-color);
+    border: none;
     outline: none;
 }
 
-p textarea {
-    flex: 0.9;
-    color : var(--text-color);
-    font-family: : var(--text-font);
-    background-color: var(--card-bcgcolor);
-    border: solid 1px var(--text-color);
-    padding: 1rem;
-    outline: none;
-}
+
 
 
 /*.boton{
@@ -565,7 +571,7 @@ p textarea {
     color: var(--text-color);
     font-family: var(--text-font);
     height: 2rem;
-    width: auto;
+    width: 9rem;
     margin: 1rem;
     border: none;
 }

@@ -17,17 +17,19 @@
 <div class="container">
         <form class="form" method="POST">
             {% csrf_token %}
+            <span style="margin-top: 8vh; font-size:2rem; font-weight:bold;">CREATION D'UN EVENEMENT</span>
             <div class="wrapper">
                     {{form.as_p}}
+                    <div class="btns-create-event">
+
+                            <input type="reset" class="boton"></input>
+                            <input type="submit" class="boton"></input>
+
+                    <div>
             </div>
-            <div class="btns-create-event">
-                <p>
-                    <input type="reset" class="boton"></input>
-                    <input type="submit" class="boton"></input>
-                </p>
-            <div>
+
 
         </form>
-    </div>
+
 </div>
 {% endblock content %}
