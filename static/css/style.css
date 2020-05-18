@@ -637,6 +637,10 @@ footer {
     button.generic-bouton, a.generic-bouton, input.generic-bouton{
         margin: 0.5vh;
     }
+    .card::-webkit-scrollbar {
+        display: none;
+    }
+
 
     .desktop_menu{
         display: none;
