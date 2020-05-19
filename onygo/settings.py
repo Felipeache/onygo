@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     "rest_framework_api_key",
     'updater.apps.UpdaterConfig',
+    'corsheaders',
+
     ]
 
 REST_FRAMEWORK = {
@@ -76,9 +78,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_userforeignkey.middleware.UserForeignKeyMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'onygo.urls'
+CORS_ORIGIN_ALLOW_ALL = True
 
 TEMPLATES = [
     {
