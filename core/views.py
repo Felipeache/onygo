@@ -334,8 +334,10 @@ def create_user(request):
         ProfileForm = UserProfile_Form(request.POST, request.FILES)
         if form.is_valid() and ProfileForm.is_valid():
             user = form.save()
-            profile = ProfileForm.save(commit=False)
+            profile = ProfileForm()
             profile.user = user
+            #profile = ProfileForm.save(commit=False)
+            #profile.user = user
             profile.save()
             login(request, user)
             return redirect("index")
