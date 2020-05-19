@@ -643,8 +643,12 @@ footer {
         display: none;
     }
     .imgcontainer {
-    padding: 13vh;
+    margin-top: 13vh;
     background: #3A4231;
+    }
+    .mainimg{
+        width: 100%;
+        height: auto;
     }
 
     #id_avatar{
