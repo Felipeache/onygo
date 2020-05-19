@@ -337,6 +337,10 @@ def create_user(request):
             profile = ProfileForm.save(commit=False)
             profile.user = user
             profile.save()
+            print("UUUUUUUUUUUUUUUUUUUUUSSSSSSSSR3",user)
+            login(request, user)
+            return redirect("index")
+
     else:
         form = CustomUserCreationForm()
         ProfileForm = UserProfile_Form()
