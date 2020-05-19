@@ -337,9 +337,14 @@ def create_user(request):
             profile = ProfileForm.save(commit=False)
             profile.user = user
             profile.save()
-            print("UUUUUUUUUUUUUUUUUUUUUSSSSSSSSR3",user)
             login(request, user)
             return redirect("index")
+        else:
+            form = CustomUserCreationForm()
+            ProfileForm = UserProfile_Form()
+            context = {'form': form, 'profileForm': ProfileForm}
+            messages.error( request, "Il y a une erreur dans le formulaire")
+            return render(request, "registration/register.html", context )
 
     else:
         form = CustomUserCreationForm()
