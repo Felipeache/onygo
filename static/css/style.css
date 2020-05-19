@@ -776,7 +776,7 @@ footer {
       overflow: hidden;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-evenly;
     }
 
     .menu-wrap .menu > div {
