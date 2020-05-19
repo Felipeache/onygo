@@ -28,6 +28,7 @@
           <div>
             <ul>
             {% if user.is_authenticated %}
+            <li style="color:#FFFFFC" > Hello {{user.get_short_name | title}} !</li>
               <li><a href="{% url 'index'%}">Home</a></li>
               <li><a href="{% url 'search'%}">Chercher un événement</a></li>
               <li><a href="{% url 'create_event'%}">Creer un événement</a></li>
