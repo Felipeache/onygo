@@ -127,7 +127,6 @@ input[type=number] {
 }
 
 .mainimg{
-    filter: blur(1px);
     width: 100vw;
     height: auto;
 }
