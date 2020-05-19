@@ -127,7 +127,7 @@ input[type=number] {
 }
 
 .mainimg{
-    width: 100vw;
+    width: 100%;
     height: auto;
 }
 /*texte sur l'image */
@@ -641,6 +641,10 @@ footer {
 
     .desktop_menu{
         display: none;
+    }
+    .imgcontainer {
+    padding: 13vh;
+    background: #3A4231;
     }
 
     #id_avatar{
