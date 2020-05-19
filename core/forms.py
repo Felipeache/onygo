@@ -32,12 +32,14 @@ class Send_Message_Form(ModelForm):
 
 class Create_Event_Form(ModelForm):
     event_name = forms.CharField(
-    min_length=4, max_length=45, widget=forms.Textarea(
+    min_length=8, max_length=45, widget=forms.Textarea(
                                 attrs={
                                     "rows":1,
                                     "cols":1,
                                     "style": "resize: none",
-                                    'placeholder':'Title de ton événement...'
+                                    "placeholder":"Title de ton événement...",
+                                    "help_text": "Au moins 8 lettres"
+
                                     }
                         )
     )
@@ -52,7 +54,7 @@ class Create_Event_Form(ModelForm):
                                 "rows":5,
                                 "cols":20,
                                 "style": "resize: none",
-                                "placeholder": 'Décris ton événement....'
+                                "placeholder": 'Décris ton événement...'
 
                                 }
                         )

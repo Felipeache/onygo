@@ -6,8 +6,6 @@
     --text-font: 'Comfortaa',serif;
     --white-font: #FAF8F4;
 }
-@import url('https://fonts.googleapis.com/css?family=Lato');
-
 
 #id_avatar{
     padding: 1vh;
@@ -687,7 +685,8 @@ footer {
     }
 
     .menu-wrap .hamburger {
-      position: absolute;
+      position: sticky;
+      border-radius: 10px;
       top: 0;
       left: 0;
       z-index: 1;
