@@ -85,14 +85,14 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'onygo.urls'
-# CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:8100",
-    "http://localhost:8000",
-    "http://127.0.0.1:8100",
-    "http://127.0.0.1:8000",
-
-]
+CORS_ORIGIN_ALLOW_ALL = True
+#CORS_ORIGIN_WHITELIST = [
+#    "http://localhost:8100",
+#    "http://localhost:8000",
+#    "http://127.0.0.1:8100",
+#    "http://127.0.0.1:8000",
+#
+#]
 
 TEMPLATES = [
     {
