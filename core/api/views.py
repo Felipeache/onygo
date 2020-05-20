@@ -12,7 +12,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-
+@api_view(['GET',])
 class EnventsListApi(ListAPIView):
     #user_id=
     #u = UserProfile.objects.get(user_id=user_id)
