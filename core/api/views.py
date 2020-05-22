@@ -11,6 +11,7 @@ from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 
 class EnventsListApi(ListAPIView):
@@ -24,7 +25,7 @@ class EnventsListApi(ListAPIView):
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ('event_name', 'event_description','city') #owner__username
     #ordering_fields = ()
-    
+
 
 
 @api_view(['GET',])
