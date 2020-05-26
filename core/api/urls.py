@@ -1,12 +1,12 @@
 from django.urls import path
 from core.api.views import (
-            get_event_viewset,
-            event_list_viewset,
-            update_event_viewset,
-            delete_event_viewset,
-            create_event_viewset,
-            create_user_viewset,
-            EnventsListApi
+        get_event_viewset,
+        event_list_viewset,
+        update_event_viewset,
+        delete_event_viewset,
+        create_event_viewset,
+        create_user_viewset,
+        EnventsListApi
         )
 
 app_name = 'core'
@@ -20,6 +20,4 @@ urlpatterns = [
     path('<int:id>/delete/', delete_event_viewset, name='delete_event_viewset'),
     path('create/', create_event_viewset, name='create_event_viewset'),
     # Registration:
-
-
 ]

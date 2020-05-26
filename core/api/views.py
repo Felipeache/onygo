@@ -15,20 +15,20 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class EnventsListApi(ListAPIView):
-    #user_id=
-    #u = UserProfile.objects.get(user_id=user_id)
-    queryset = Event.objects.filter(city = "bogota").order_by('date')
+    queryset = Event.objects.all().order_by('date')
     serializer_class = EventSerializer
     #authentication_classes = (TokenAuthentication,)
     #permission_classes = (IsAuthenticated,)
     pagination_class = PageNumberPagination
     filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ('event_name', 'event_description','city') #owner__username
+    search_fields = ('event_name', 'event_description', 'city') #owner__username
     #ordering_fields = ()
 
 
 
-@api_view(['GET',])
+
+
+@api_view(['GET', ])
 @permission_classes((IsAuthenticated, ))
 def event_list_viewset(request):
     try:
@@ -37,6 +37,7 @@ def event_list_viewset(request):
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = EventSerializer(events, many=True)
     return Response(serializer.data)
+
 
 
 @api_view(['GET',])
@@ -84,28 +85,33 @@ def delete_event_viewset(request, id):
         data["failure"] = "Il y a eu une erreur"
         return Response(serializers.errors, data=data)
 
-@api_view(['POST',])
+
+@api_view(['POST', ])
 #@permission_classes((IsAuthenticated, ))
 def create_event_viewset(request):
     user = request.user
     ev = Event(owner=user)
     serializer = EventSerializer(ev, data=request.data)
     if serializer.is_valid():
-        #Validation de la date:
         today = datetime.now().date()
         date_str = request.data.get('date')
         format_str = '%Y-%m-%d'
         date_obj = datetime.strptime(date_str, format_str)
         if date_obj.date() < today:
-            raise serializers.ValidationError({'date': 'date passé'})
-        #Validation de l'heure:
+            raise serializers.ValidationError({'date': 'Il n\'est pas possible de créer un événement dans le passé' })
         crt_time = datetime.now().time()
         time_str = request.data.get('time')
         time_obj = datetime.strptime(time_str, '%H:%M')
         if time_obj.time() < crt_time and date_obj.date() <= today:
-            raise serializers.ValidationError ({'time':'heure passé'})
+            raise serializers.ValidationError(
+                {
+                    'time':
+                    'Il n\'est pas possible de \
+                    créer un événement dans le passé'
+                }
+            )
         serializer.save()
-        return Response(serializer.data,status=status.HTTP_201_CREATED)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -121,6 +127,7 @@ def create_user_viewset(request):
         data['username'] = user.username
         token = Token.objects.get(user=user).key
         data['token'] = token
+        return Response({'Utilisateur créé': 'ok', 'token': token})
     else:
         data = serializer.errors
         return Response(data)
