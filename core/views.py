@@ -32,19 +32,9 @@ def search(request):
         events = paginator.get_page(page)
         #messages.success(request,f'Nous avons trouvé {qtty} événements')
         return render(request, "core/chercher-evenement.html", {"events":events})
-
-        #else:
-        #    messages.error(request,f'Nos lutins n\'ont pas compris')
-        #    return render(request, "core/chercher-evenement.html")
     else:
         messages.success(request, "Tous les événements de ta ville ")
         return (search_event(request))
-
-
-        #else:
-        #    messages.error(request,"Else de if q: devuelvo a \"search_event\" ")
-        #    return redirect( "search_event")
-
 
 
 def home(request):
@@ -80,7 +70,7 @@ def visit_profile(request, id):
     except User.DoesNotExist:
         messages.error(request, "Cet utilisateur n'existe pas")
         return redirect('profile')
-    except Entry.MultipleObjectsReturned:
+    except "Entry.MultipleObjectsReturned":
         messages.error(request, "Plusieurs utilisateurs trouvés")
         return redirect('profile')
 
