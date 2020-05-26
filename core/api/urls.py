@@ -1,6 +1,4 @@
 from django.urls import path
-
-
 from core.api.views import (
             get_event_viewset,
             event_list_viewset,
