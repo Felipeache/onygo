@@ -89,6 +89,8 @@ def delete_event_viewset(request, id):
 @api_view(['POST', ])
 #@permission_classes((IsAuthenticated, ))
 def create_event_viewset(request):
+    print("********************************************************************************************************")
+    print("token recu: ",request.META.get('HTTP_AUTHORIZATION').split()[1]))
     getUserId = Token.objects.get(key=request.META.get('HTTP_AUTHORIZATION').split()[1]).user_id
     getUserObj = User.objects.get(id=getUserId)
     ev = Event(owner=getUserObj)
@@ -112,7 +114,7 @@ def create_event_viewset(request):
                 }
             )
         serializer.save()
-        
+
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
