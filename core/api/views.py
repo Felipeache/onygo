@@ -89,7 +89,8 @@ def delete_event_viewset(request, id):
 @api_view(['POST', ])
 #@permission_classes((IsAuthenticated, ))
 def create_event_viewset(request):
-    user = request.user
+    token = Token.objects.get(key=request.META.get('HTTP_AUTHORIZATION').split()[1]
+    user = Token.objects.get(key=token).user
     ev = Event(owner=user)
     serializer = EventSerializer(ev, data=request.data)
     if serializer.is_valid():
