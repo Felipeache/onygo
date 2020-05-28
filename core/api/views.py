@@ -93,7 +93,11 @@ def create_event_viewset(request):
     print("********************************************************************************************************")
     print("token recu: ",request.META.get('HTTP_AUTHORIZATION'))
     getUserId = Token.objects.get(key=request.META.get('HTTP_AUTHORIZATION').split()[1]).user_id
+    print("getUserId: ",getUserId)
     getUserObj = User.objects.get(id=getUserId)
+    print("getUserObj: ",getUserObj)
+    print("TYPE:", type(getUserObj))
+
     ev = Event(owner=getUserObj)
 
     serializer = EventSerializer(ev, data=request.data)
