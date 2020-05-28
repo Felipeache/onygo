@@ -91,7 +91,7 @@ def delete_event_viewset(request, id):
 def create_event_viewset(request):
     print("********************************************************************************************************")
     print("********************************************************************************************************")
-    print("token recu: ",request.META.get('HTTP_AUTHORIZATION').split()[1]))
+    print("token recu: ",request.META.get('HTTP_AUTHORIZATION').split()[1])
     getUserId = Token.objects.get(key=request.META.get('HTTP_AUTHORIZATION').split()[1]).user_id
     getUserObj = User.objects.get(id=getUserId)
     ev = Event(owner=getUserObj)
