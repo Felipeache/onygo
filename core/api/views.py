@@ -21,7 +21,7 @@ class EnventsListApi(ListAPIView):
     #permission_classes = (IsAuthenticated,)
     pagination_class = PageNumberPagination
     filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ('id', 'event_name', 'event_description', 'city') #owner__username
+    search_fields = ('event_name', 'event_description', 'city') #owner__username
     #ordering_fields = ()
 
 

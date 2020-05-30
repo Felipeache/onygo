@@ -43,7 +43,7 @@ class EventSerializer(serializers.ModelSerializer):
     owner = serializers.SerializerMethodField('get_owner_name')
     class Meta:
         model = Event
-        fields = ('city', 'owner', 'event_name', 'event_description', 'date', 'time')
+        fields = ('id', 'city', 'owner', 'event_name', 'event_description', 'date', 'time')
     def get_owner_name(self, Event):
         owner = Event.owner.username
         return owner
