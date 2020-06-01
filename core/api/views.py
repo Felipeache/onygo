@@ -25,6 +25,13 @@ class EnventsListApi(ListAPIView):
     #ordering_fields = ()
 
 
+def getUserFromToken(request):
+    getUserId = Token.objects.get(
+                                key=request.META.get('HTTP_AUTHORIZATION')
+                                .split()[1]
+                        ).user_id
+    return (User.objects.get(id=getUserId))
+
 
 
 
@@ -142,11 +149,12 @@ def create_user_viewset(request):
         data = serializer.errors
         return Response(data)
 
-@api_view(['POST',])
+@api_view(['POST','GET'])
 #@permission_classes((IsAuthenticated,))
 def profil_view(request):
     try:
-        user=request.user
+        user = getUserFromToken(request)
+        #user=request.user
     except User.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = ProfilSerializer(user)
