@@ -1,8 +1,6 @@
 from rest_framework import serializers
-
 from django.contrib.auth.models import User
-
-from core.models import Event, UserProfile
+from core.models import Event, UserProfile, Message
 
 
 
@@ -47,3 +45,25 @@ class EventSerializer(serializers.ModelSerializer):
     def get_owner_name(self, Event):
         owner = Event.owner.username
         return owner
+
+
+class ShowSendersSerializer(serializers.ModelSerializer):
+    sender = serializers.SerializerMethodField('get_senders_name')
+    print("******************************************ID:", id)
+    class Meta:
+        model = Message
+        fields = ('sender',)
+
+    def get_senders_name(self, Message):
+        userId = Message.get('sender')
+        print("******************************************ID:", userId)
+        userProfile = UserProfile.objects.get(id = Message.get('sender'))
+        return ('id: '+str(userId), 'user: '+userProfile.user.username)
+
+
+
+
+class ShowMessagesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = ('sender', )

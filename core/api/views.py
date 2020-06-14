@@ -1,6 +1,5 @@
 from datetime import datetime
-from core.models import Event, UserProfile
-from core.api.serializers import EventSerializer, CreateUserSerializer, ProfilSerializer
+from core.models import Event, UserProfile, Message
 from django.contrib.auth.models import User
 from rest_framework import status, serializers
 from rest_framework.authtoken.models import Token
@@ -12,6 +11,12 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from core.api.serializers import (
+                EventSerializer,
+                CreateUserSerializer,
+                ProfilSerializer,
+                ShowSendersSerializer
+            )
 
 
 class EnventsListApi(ListAPIView):
@@ -32,7 +37,17 @@ def getUserFromToken(request):
                         ).user_id
     return (User.objects.get(id=getUserId))
 
+@api_view(('GET',))
+def show_senders(request):
+    getUser = getUserFromToken(request)
+    me = UserProfile.objects.get(user_id = getUser.id)
+    print("PRINTIG ME LINEA 43 -->",getUser)
+    print("PRINTIG USER EN LA LINEA 44 -->",me.id)
+    senders = Message.objects.filter(receiver_id = me.id).values('sender').distinct()
+    print("PRINTIG msg----->", senders)
 
+    serializer = ShowSendersSerializer(senders, many=True)
+    return Response(serializer.data)
 
 
 @api_view(['GET', ])

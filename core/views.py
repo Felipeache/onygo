@@ -164,10 +164,6 @@ def search_event(request):
     return render (request, 'core/liste-evenements.html', context)
 
 
-#class SearchEventList(ListView)::
-#    model = Event
-#    template_name = 'core/chercher-evenement.html'
-#    paginate_by = 5
 def send_message(request, sender, receiver):
     receiver = UserProfile.objects.get(id=receiver)
     sender = UserProfile.objects.get(user_id=request.user.id)
@@ -185,37 +181,28 @@ def send_message(request, sender, receiver):
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
             data['form'] = form
-            messages.error(request,f'Oops {request.user}! ton message n\'a pas été envoyé :C', form.errors)
+            messages.error(
+                            request,
+                            f'Oops {request.user}! ton message n\'a pas été envoyé :C',
+                            form.errors
+                        )
     return render(request, 'core/envoyer-message.html', data)
 
 
 def show_senders(request):
     me = UserProfile.objects.get(user_id=request.user.id)
-    print("meeeeeeeeeeeeeeeeeeeeeee:",me)
     context = []
-    msgs = Message.objects.filter( receiver_id = me ).values('sender').distinct()
-    print("**********************************")
-    print('mensajes encontrados:',msgs.count())
-    print("**********************************")
-    print("**********************************")
+    msgs = Message.objects.filter(receiver_id = me).values('sender').distinct()
     for sender in msgs:
-        print('FOR SENDER IN MSGS',sender,msgs,'context',context)
+        print('FOR SENDER IN MSGS', sender, msgs, 'context', context)
         value=sender.values()
-        print('value = sender.values()',value)
+        print('value = sender.values()', value)
         for id in value:
-            context +=UserProfile.objects.filter(id = id)
-            print('msgs',msgs,'context',context)
-    print("**********************************")
-    print('me',me,'msgs:', msgs, 'value:',  'context:', context)
-    print("**********************************")
-    print("**********************************")
-    print("**********************************")
-    print("**********************************")
-    return render(request, "core/inbox.html", {'context':context} )
+            context += UserProfile.objects.filter(id = id)
+    return render(request, "core/inbox.html", {'context': context} )
 
 
 def show_messages(request, sender_id):
-
     me = UserProfile.objects.get(user_id=request.user.id)
     sender = UserProfile.objects.get(user_id=sender_id)
     received_msgs = []
