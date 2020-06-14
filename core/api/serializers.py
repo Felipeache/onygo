@@ -58,7 +58,7 @@ class ShowSendersSerializer(serializers.ModelSerializer):
         userId = Message.get('sender')
         print("******************************************ID:", userId)
         userProfile = UserProfile.objects.get(id = Message.get('sender'))
-        return ('id: '+str(userId), 'user: '+userProfile.user.username)
+        return (userId,userProfile.user.username)
 
 
 
