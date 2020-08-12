@@ -42,7 +42,7 @@ def search(request):
                 {"events": events}
         )
     else:
-        messages.success(request, 'Resultats de ta recherche: '+q)
+        messages.success(request, f'Resultats de ta recherche: {q}')
         return (search_event(request))
 
 
