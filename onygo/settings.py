@@ -24,12 +24,12 @@ SECRET_KEY = '@_f*^@8hd=sp%^fme^8clw2m4dx5qkvr4wzciu#yl9gnt=t(lp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-#Rediction apres Login et Logout:
+# Rediction apres Login et Logout:
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.39', 'holiholi.pythonanywhere.com']
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-#Deconection automatique après un temps d'inativité:
-TIME= 50000000*60
+# Deconection automatique après un temps d'inativité:
+TIME= 5000*60
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 SESSION_EXPIRE_AT_BROWSER_CLOSE= True
 SESSION_COOKIE_AGE = TIME
@@ -59,16 +59,15 @@ INSTALLED_APPS = [
 
 
 REST_FRAMEWORK = {
-    # 'DEFAULT_AUTHENTICATION_CLASSES': [
-    #             'rest_framework.authentication.TokenAuthentication',
-    # ],
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #             'rest_framework.permissions.IsAuthenticated',
-    #             #"rest_framework_api_key.permissions.HasAPIKey",
-    # ],
-
+     'DEFAULT_AUTHENTICATION_CLASSES': [
+                 'rest_framework.authentication.TokenAuthentication',
+     ],
+     'DEFAULT_PERMISSION_CLASSES': [
+                 'rest_framework.permissions.IsAuthenticated',
+                 #"rest_framework_api_key.permissions.HasAPIKey",
+     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE':8,
+    'PAGE_SIZE': 8,
 }
 
 MIDDLEWARE = [
