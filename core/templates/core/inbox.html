@@ -26,7 +26,11 @@
 
 
         {% else%}
-            <h1 style="color:red;"> Pas de messages
+        <span class="alert-error">
+            <p style="margin: 4vw;">Tu n'as pas de messages</p>
+            <div class="closebtn" onclick="this.parentElement.style.display='none';">&times;</div>
+            </div>
+        </span>
 {%endif%}
 
 

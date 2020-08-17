@@ -26,14 +26,14 @@ html {
     display: none;
 }
 
-
 hr.msgs {
     border: 0;
-    height: 0; /* Firefox... */
+    height: 0;
     box-shadow: 0 0 10px 1px var(--text-color);
 }
-hr.msgs :after {  /* Not really supposed to work, but does */
-    content: "\00a0";  /* Prevent margin collapse */
+
+hr.msgs :after {
+    content: "\00a0";
 }
 
 a:link {
@@ -72,22 +72,17 @@ button {
     display: none;
 }
 
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
     -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    margin: 0;
 }
 
 input[type=number] {
-    -moz-appearance:textfield; /* Firefox */
+    -moz-appearance:textfield;
 }
 
-
-
 /* CSS pour le monstre de la 404 */
-
 .beast {
     margin: 0;
 }
@@ -96,6 +91,7 @@ input[type=number] {
     padding: 20px 0 20px 20px;
     position: relative;
 }
+
 #beast404re {
     left: 231px;
     top: 68px;
@@ -107,32 +103,26 @@ input[type=number] {
     top: 65px;
     -webkit-animation-name: crazylefteye;
     animation-name: crazylefteye;
-} /*Fin CSS montre 404 */
+}
+/*Fin CSS montre 404 */
 
-
-
-/*.mainpic{
-    top: 100%
-    padding: 0px;
-    border: 13px solid #b9d6f2;
-	font-size: 2em;
-    margin: 0px;
-    padding: 0px;
-}*/
 /*Image principale du home*/
 .imgcontainer{
     position: relative;
-    display: inline-block;
+    display: flex;
     text-align: center;
 }
 
 .mainimg{
     width: 100%;
+    display: flex;
     height: auto;
 }
 /*texte sur l'image */
  .CenterdText{
     position: absolute;
+    display: flex;
+    flex-direction: column;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -148,6 +138,7 @@ input[type=number] {
      background-color: #FFEDE5;
      border-radius: 10px;
      color: #0A37FF;
+     padding: 1rem;
      height: 2rev;
      opacity: 60%;
  }
@@ -240,7 +231,6 @@ li a:hover{
 }
 
 .container {
-  display: flex;
   flex-flow: column;
   flex-basis: 100%;
   height: auto;
@@ -307,12 +297,10 @@ li a:hover{
         background: #3FFFA2;
         display: flex;
         align-items: center;
-
         padding: 10px;
-
         opacity: 60%;
         border-radius: 10px;
-        width: 60%;
+        /*width: 60%;*/
         height: auto;
         margin: 100px;
         font-weight: bold;
@@ -474,9 +462,15 @@ button.generic-bouton:hover {
     padding: 25px;
 }
 .form{
+    max-width: 45rem;
     display: flex;
     flex-direction: column;
-    background-color:  #ff11;
+    background-color: #ff11;
+    margin: 0 auto;
+
+    /* display: flex;
+    flex-direction: column;
+    background-color:  #ff11; */
 
 }
 .form p{
@@ -514,7 +508,7 @@ p input, p textarea {
     font-family: var(--text-font);
     height: 2rem;
     width: 9rem;
-    margin: 1rem;
+    margin: 1rem auto;
     border: none;
 }
 
@@ -621,6 +615,14 @@ footer {
 
 }
 
+@media screen and (max-width: 964px) {
+
+    .CenterdText{
+        display: none;
+    }
+
+}
+
 @media screen and (max-width: 700px) {
 
      html {
@@ -637,18 +639,17 @@ footer {
     .card::-webkit-scrollbar {
         display: none;
     }
-
-
     .desktop_menu{
         display: none;
     }
     .imgcontainer {
     margin-top: 13vh;
     background: #3A4231;
+    display: flex;
     }
     .mainimg{
-        width: 100%;
         height: auto;
+        display: flex;
     }
 
     #id_avatar{
@@ -656,7 +657,9 @@ footer {
         border-radius: 10px;
         min-width: 35vh;
     }
-    .slogan{ display: none;}
+    .slogan{
+        display: none;
+    }
     p input{
         flex: 2;
         min-width: 25vh;
@@ -800,6 +803,7 @@ footer {
     }
 
     .menu-wrap .menu > div > div {
+        margin-left: -3rem;
       text-align: center;
       max-width: 90vw;
       max-height: 100vh;
@@ -821,18 +825,6 @@ footer {
       transition: color 0.4s ease;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
     .search-container{
         width: auto;
     }
@@ -849,8 +841,6 @@ footer {
     #wrap{
          display: contents;
      }
-
-
 }
 
 @media screen and (max-width: 500px) {

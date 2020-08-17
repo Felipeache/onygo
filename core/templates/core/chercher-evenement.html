@@ -50,7 +50,11 @@
     </div>
 
 {% else%}
-    <h1 style="color:red;"> Tu n'as pas encore des événements</h1>
+<span class="alert-error">
+    <p style="margin: 4vw;">Il n'y a pas de resultats pour ta recherche</p>
+    <div class="closebtn" onclick="this.parentElement.style.display='none';">&times;</div>
+    </div>
+</span>
 {% endif %}
 
 

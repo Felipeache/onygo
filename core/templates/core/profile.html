@@ -9,7 +9,7 @@
 {% endblock headimg%}
 
 {% block content %}
-<h1>Profil de {{utilisateur.get_short_name | title}}</h1>
+
 <div class="eventscontainer">
             <div class="card">
                     <img src="{{ user.userprofile.avatar.url|default_if_none:'avatars/default.png'  }}" width="100" height="100"></a>

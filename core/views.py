@@ -42,7 +42,7 @@ def search(request):
                 {"events": events}
         )
     else:
-        messages.success(request, f'Resultats de ta recherche: {q}')
+        # messages.success(request, f'Resultats de ta recherche: {q}')
         return (search_event(request))
 
 
@@ -262,7 +262,10 @@ def apply(request, id):
             guest = UserProfile.objects.get(user_id=user_id)
             ev = EventJoin(event=Event.objects.get(id=id), guest=guest)
             ev.save()
-            messages.success(request, f"{user_name}, ta demande a été envoyée!")
+            messages.success(
+                        request,
+                        f"{user_name}, ta demande a été envoyée!"
+            )
             return redirect('search_event')
         except Exception as e:
             error = str(e)

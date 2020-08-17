@@ -15,9 +15,6 @@
 {% if msgs_list%}
     <div class="eventscontainer">
         <div class="card">
-            MI ID:{{request.user.id}} {{user}}<br>
-
-
         {% for msg in msgs_list %}
                 <p>{{sender}}, le {{msg.sent}}:</p>
                 <p>{{msg.text}}</p>
@@ -40,7 +37,11 @@
 
 
         {% else%}
-            <h1 style="color:red;"> Pas de messages
+        <span class="alert-error">
+            <p style="margin: 4vw;">Tu n'as pas de messages</p>
+            <div class="closebtn" onclick="this.parentElement.style.display='none';">&times;</div>
+            </div>
+        </span>
 {%endif%}
 
 
