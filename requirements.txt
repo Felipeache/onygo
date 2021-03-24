@@ -8,7 +8,7 @@ django-import-export==2.0.2
 django-js-asset==1.2.2
 django-rest-framework==0.1.0
 django-userforeignkey==0.3.0
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 djangorestframework-api-key==2.0.0
 mkl-random==1.1.0
 prompt-toolkit==2.0.10
@@ -18,7 +18,7 @@ python-language-server==0.31.9
 jango==3.0.6
 django-filter==2.2.0
 django-userforeignkey==0.3.0
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 djangorestframework-api-key==2.0.0
 Pillow==7.1.2
 pytz==2020.1
