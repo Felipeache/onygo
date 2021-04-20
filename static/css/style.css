@@ -211,10 +211,7 @@ li a {
  display: inline-block;
 }
 
-li a:hover{
-    background-color: rgba(0, 0, 0, 0.1);
-    color: var(--card-bcgcolor);
-}
+
 
 .paginator {
     display: inline-block;
