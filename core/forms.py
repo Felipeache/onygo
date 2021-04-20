@@ -160,15 +160,16 @@ class CustomUserCreationForm(UserCreationForm):
         #    'password2': None,
         # }
 
-    def save(self, commit=True):
-        user = super(CustomUserCreationForm, self).save(commit=False)
-        user.first_name = self.cleaned_data["username"]
-        user.first_name = self.cleaned_data["first_name"]
-        user.last_name = self.cleaned_data["last_name"]
-        user.email = self.cleaned_data["email"]
-        # if commit:
-        user.save(commit=True)
-        return user
+
+def save(self, commit=True):
+    user = super(CustomUserCreationForm, self).save(commit=False)
+    user.first_name = self.cleaned_data["username"]
+    user.first_name = self.cleaned_data["first_name"]
+    user.last_name = self.cleaned_data["last_name"]
+    user.email = self.cleaned_data["email"]
+    if commit:
+        user.save()
+    return user
 
 
 class UserProfile_Form(forms.ModelForm):
@@ -188,6 +189,6 @@ class ChangePasswordForm(PasswordChangeForm):
     class Meta:
         model = User
         help_texts = {
-            "password1": None,
-            "password2": None,
+            "password1": "Ton password",
+            "password2": "Ton password encore une fois",
         }

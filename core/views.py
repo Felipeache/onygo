@@ -273,11 +273,11 @@ def create_event(request):
     if request.method == "POST":
         form = Create_Event_Form(request.POST)
         if form.is_valid():
-            event = form.save(commit=False)
-            event.owner = request.user
-            event.event_lat_lon = get_lat_lon(event.event_address, event.city)
-            event.zip_code = get_postal_code(event.event_address, event.city)
-            event.save()
+            post = form.save(commit=False)
+            post.event_owner = request.user
+            post.event_lat_lon = get_lat_lon(post.event_address, post.city)
+            post.zip_code = get_postal_code(post.event_address, post.city)
+            post.save()
             messages.success(
                 request,
                 f"Merci {request.user}!\
