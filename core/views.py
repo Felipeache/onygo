@@ -1,3 +1,4 @@
+from django.http.response import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from django.core.exceptions import ObjectDoesNotExist
@@ -23,6 +24,42 @@ from .forms import (
 
 def view_404(request, *e):
     return render(request, "core/404.html")
+
+
+def get_events_coords(request):
+    # return lat_lon of all events in the same city than the user
+    from datetime import datetime
+    import json
+
+    today = datetime.now().strftime("%Y-%m-%d")
+    actual_time = datetime.now().strftime("%H:%m")
+    id = request.user.id
+    user_profile = UserProfile.objects.get(user=id)
+    events = (
+        Event.objects.filter(city__icontains=user_profile.city)
+        .exclude(date__lt=today, time__lt=actual_time)
+        .order_by("time")
+    )
+    events_lat_lons = list((event.event_lat_lon for event in events))
+    # events_lat_lons = {event.id: event.event_lat_lon for event in events}
+    print(events_lat_lons)
+
+    return json.dumps(events_lat_lons)
+
+
+@login_required()
+def default_map(request):
+    # TODO: move this token to Django settings from an environment variable
+    # found in the Mapbox account settings and getting started instructions
+    # see https://www.mapbox.com/account/ under the "Access tokens" section
+
+    map_token = "pk.eyJ1IjoiZmVsaXBlYWNoZSIsImEiOiJja25yZ2w5cXIwOHBhMm9wajlzYms5d2k3In0.ZQR5AVq7lTYowZ5E3qFdjA"
+    events_coordinates = get_events_coords(request)
+    return render(
+        request,
+        "maps.html",
+        {"map_token": map_token, "events_coordinates": events_coordinates},
+    )
 
 
 # Search bar in the site:
@@ -147,8 +184,8 @@ def validate(request, id):
         messages.error(request, f"Cet événement n'existe pas!")
         return redirect("index")
     if event.owner_id == request.user.id:
-        events = EventJoin.objects.filter(event=id)
-        accepted = EventJoin.objects.filter(event=id, accepted=True)
+        events = EventJoin.objects.filter(event_name=id)
+        accepted = EventJoin.objects.filter(event_name=id, accepted=True)
         context = {"events": events, "accepted": accepted}
 
         return render(request, "core/valider-demandes.html", context)
@@ -249,7 +286,7 @@ def apply(request, id):
     if request.method == "GET":
         try:
             guest = UserProfile.objects.get(user_id=user_id)
-            ev = EventJoin(event=Event.objects.get(id=id), guest=guest)
+            ev = EventJoin(event_name=Event.objects.get(id=id), guest=guest)
             ev.save()
             messages.success(request, f"{user_name}, ta demande a été envoyée!")
             return redirect("search_event")
@@ -274,7 +311,7 @@ def create_event(request):
         form = Create_Event_Form(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.event_owner = request.user
+            post.owner = request.user
             post.event_lat_lon = get_lat_lon(post.event_address, post.city)
             post.zip_code = get_postal_code(post.event_address, post.city)
             post.save()

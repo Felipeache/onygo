@@ -31,8 +31,8 @@ class UserProfile(models.Model):
 class Event(models.Model):
 
     created_on = models.DateTimeField(auto_now=True)
-    event_owner = models.ForeignKey(
-        User, on_delete=models.CASCADE, null=True, related_name="event_owner"
+    owner = models.ForeignKey(
+        User, on_delete=models.CASCADE, null=True, related_name="owner"
     )
     event_assisters = models.ManyToManyField(
         UserProfile, through="EventJoin", related_name="event_assisters"

@@ -1,7 +1,5 @@
 from requests import post
 
-API_RESPONSE = ""
-
 
 def validate_address(event_address, city):
     if len(event_address) == 0 or len(city) == 0:
@@ -15,7 +13,6 @@ def validate_address(event_address, city):
 
 
 def get_lat_lon(event_address, city):
-
     event_address = event_address.replace(" ", "+").strip()
     city = city.replace(" ", "+").strip()
     geo_api = f"https://nominatim.openstreetmap.org/search?q={event_address}+{city}&format=json&polygon=1&addressdetails=1"
@@ -41,6 +38,3 @@ def decode_lat_lon(lat_lon):
     api_response = post(decode_api).json()
     lat_lon = "", ""
     return api_response["address"]
-
-
-print(validate_address("dfsdfs", ""))
