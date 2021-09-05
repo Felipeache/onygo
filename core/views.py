@@ -13,6 +13,7 @@ from .services import get_lat_lon, get_postal_code
 from django.db.models import Q
 from itertools import chain
 from operator import attrgetter
+from datetime import datetime
 from .forms import (
     Create_Event_Form,
     CustomUserCreationForm,
@@ -69,9 +70,12 @@ def search(request):
     if q:
         events = (
             Event.objects.filter(
-                Q(city__icontains=q)
-                | Q(event_name__icontains=q)
-                | Q(event_description__icontains=q)
+                (
+                    Q(city__icontains=q)
+                    | Q(event_name__icontains=q)
+                    | Q(event_description__icontains=q)
+                )
+                & Q(date__gte=datetime.now().date())
             )
             .distinct()
             .order_by("date")
@@ -234,7 +238,7 @@ def send_message(request, sender, receiver):
             data["form"] = form
             messages.error(
                 request,
-                f"Oops {request.user}! ton message n'a pas été envoyé :C",
+                f"Oops {request.user}! ton message n'a pas été envoyé :(",
                 form.errors,
             )
     return render(request, "core/envoyer-message.html", data)
