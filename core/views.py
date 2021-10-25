@@ -23,27 +23,29 @@ from .forms import (
 def view_404(request, *e):
     return render(request, 'core/404.html')
 
-# Search bar in the site:
 @login_required
 def search(request):
-    q = request.GET.get('q')
+    q = request.GET.get("q")
     if q:
-        events = Event.objects.filter(
-                    Q(city__icontains=q) |
-                    Q(event_name__icontains=q) |
-                    Q(event_description__icontains=q)
-        ).distinct().order_by('date')
-        paginator = Paginator(events, 5)
-        page = request.GET.get('page')
-        events = paginator.get_page(page)
-        return render(
-                request,
-                "core/chercher-evenement.html",
-                {"events": events}
+        events = (
+            Event.objects.filter(
+                (
+                    Q(city__icontains=q)
+                    | Q(event_name__icontains=q)
+                    | Q(event_description__icontains=q)
+                )
+                & Q(date__gte=datetime.now().date())
+            )
+            .distinct()
+            .order_by("date")
         )
+        paginator = Paginator(events, 5)
+        page = request.GET.get("page")
+        events = paginator.get_page(page)
+        return render(request, "core/chercher-evenement.html", {"events": events})
     else:
         # messages.success(request, f'Resultats de ta recherche: {q}')
-        return (search_event(request))
+        return search_event(request)
 
 
 # Sending a new home img
