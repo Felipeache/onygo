@@ -1,6 +1,6 @@
 autopep8==1.5
 diff-match-patch==20181111
-Django==3.1.6
+Django==3.1.13
 django-ckeditor==5.9.0
 django-datetime-widget==0.9.3
 django-filter==2.2.0
