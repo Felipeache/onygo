@@ -11,6 +11,7 @@ from .models import Message, Event, User, UserProfile, EventJoin
 from django.db.models import Q
 from itertools import chain
 from operator import attrgetter
+from datetime import datetime
 from .forms import (
         Create_Event_Form,
         CustomUserCreationForm,
