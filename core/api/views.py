@@ -36,7 +36,7 @@ def getUserFromToken(request):
         key=request.META.get("HTTP_AUTHORIZATION").split()[1]
     ).user_id
     print("µµµµµµµ" * 40)
-    print("getUserId", getUserId)
+    print("getUserId", getUserId, flush=True)
     print("µµµµµµµ" * 40)
     return User.objects.get(id=getUserId)
 
@@ -94,8 +94,8 @@ def show_messages(request, id):
 def event_list_viewset(request):
     try:
         events = Event.objects.all()
-        print("events", events)
-        print("33333333" * 50)
+        print("events", events, flush=True)
+        print("33333333" * 50, flush=True)
     except Event.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = EventSerializer(events, many=True)
