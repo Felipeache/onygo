@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+        <link
+            href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css"
+            rel="stylesheet"
+        />
+
+        <title>Interactive maps for Django web apps</title>
+    </head>
+    <body>
+        <h1>Map time!</h1>
+        <div id="map" style="width: 400px; height: 300px"></div>
+        <div id="map" width="100%" style="height: 400px"></div>
+        <script>
+            // var events_coordinates_list = "{{events_coordinates}}";
+            mapboxgl.accessToken = "{{map_token}}";
+            var map = new mapboxgl.Map({
+                container: "map", // container ID
+                style: "mapbox://styles/mapbox/streets-v11", // style URL
+                center: [2.3356961, 48.8626481], // starting position [lng, lat]
+                zoom: 10.5, // starting zoom
+            });
+
+            var events_coordinates_list = JSON.parse(
+                "{{events_coordinates|escapejs}}"
+            );
+
+            // var keys = Object.keys(events_coordinates_list);
+            // var marker = new mapboxgl.Marker({
+            //     color: "#FAF",
+            //     draggable: false,
+            // });
+
+            // keys.forEach(function (key) {
+            //     console.log(typeof events_coordinates_list[key].split(" ")[0]);
+
+            //     var marker = new mapboxgl.Marker({
+            //         color: "#FAF",
+            //         draggable: false,
+            //     })
+            //         .setLngLat([
+            //             events_coordinates_list[key].split(" ")[0],
+            //             events_coordinates_list[key].split(" ")[1],
+            //         ])
+            //         .addTo(map);
+            // });
+
+            events_coordinates_list.forEach((element) => {
+                element.split(",");
+                console.log(element);
+                var marker = new mapboxgl.Marker({
+                    color: "#FAF",
+                    draggable: false,
+                })
+                    .setLngLat([element.split(" ")[1], element.split(" ")[0]])
+                    .addTo(map);
+            });
+
+            // .setLngLat([2.3356961, 48.8626481])
+            // .addTo(map);
+        </script>
+    </body>
+</html>
