@@ -136,8 +136,9 @@ def change_password(request):
 @login_required
 def my_events(request):
     id = request.user.id
-    event = get_object_or_404(Event, id=id)
-    if event:
+    #event = get_object_or_404(Event, id=id)
+        
+    if True:
         events = Event.objects.filter(owner=request.user.id).order_by('date')
         paginator = Paginator(events, 5)
         page = request.GET.get('page')
