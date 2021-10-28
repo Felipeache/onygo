@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@_f*^@8hd=sp%^fme^8clw2m4dx5qkvr4wzciu#yl9gnt=t(lp'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -90,6 +90,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 #    "http://localhost:8000",
 #    "http://127.0.0.1:8100",
 #    "http://127.0.0.1:8000",
+# '@_f*^@8hd=sp%^fme^8clw2m4dx5qkvr4wzciu#yl9gnt=t(lp'
 #
 #]
 
