@@ -85,8 +85,8 @@ h5 {
 h1 {
     margin: 0 0 20px;
     font-weight: 300;
-    font-size: 20px;
-    color: #666;
+    font-size: 4rem;
+    color: var(--text-color);
 }
 
 h2 {
