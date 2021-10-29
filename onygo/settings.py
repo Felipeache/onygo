@@ -25,7 +25,7 @@ with open ("/home/holiholi/onygo/onygo/secret.txt") as f:
 SECRET_KEY = SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 # Rediction apres Login et Logout:
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.39', 'holiholi.pythonanywhere.com']
 LOGIN_REDIRECT_URL = '/'
